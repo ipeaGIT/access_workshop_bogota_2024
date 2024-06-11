@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "access_workshop_WSTLUR_2024",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2\n\n\n```\nteste slides"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "A crash course on urban accessibility with R\nmobilidade (Banister 2011; vasconcellos2018urban?; Levinson and King 2020). Ainda hoje, o foco na mobilidade motiva políticas que priorizam a circulação de automóveis e visam aumentar a velocidade e a fluidez de trânsito para reduzir congestionamentos e, consequentemente, tempos de deslocamento (Levine, Grengs, and Merlin 2019). Essas políticas, no entanto, tendem a dar um enfoque quantitativo na mobilidade: aumentar o número de viagens, aumentar a velocidade média, diminuir o tempo de congestionamento etc.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\n\nReferences\n\nBanister, David. 2011. “The Trilogy of Distance, Speed and Time.” Journal of Transport Geography 19 (4): 950–59. https://doi.org/10.1016/j.jtrangeo.2010.12.004.\n\n\nLevine, Jonathan, Joe Grengs, and Louis A. Merlin. 2019. From Mobility to Accessibility: Transforming Urban Transportation and Land-Use Planning. Cornell University Press.\n\n\nLevinson, David, and David King. 2020. Transport Access Manual: A Guide for Measuring Connection Between People and Places. Committee of the Transport Access Manual, University of Sydney."
+  },
+  {
+    "objectID": "2_part2.html",
+    "href": "2_part2.html",
+    "title": "access_workshop_WSTLUR_2024",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "1_part.html",
+    "href": "1_part.html",
+    "title": "access_workshop_WSTLUR_2024",
+    "section": "",
+    "text": "test parte1\n\n# allocating memory to java\noptions(java.parameters = \"-Xmx6G\")\n\nlibrary(r5r)\n\nPlease make sure you have already allocated some memory to Java by running:\n  options(java.parameters = '-Xmx2G').\nYou should replace '2G' by the amount of memory you'll require. Currently, Java memory is set to -Xmx6G\n\nlibrary(accessibility)\nlibrary(sf)\n\nWarning: package 'sf' was built under R version 4.3.3\n\n\nLinking to GEOS 3.11.2, GDAL 3.8.2, PROJ 9.3.1; sf_use_s2() is TRUE\n\nlibrary(data.table)\nlibrary(ggplot2)\nlibrary(h3jsr)\nlibrary(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:data.table':\n\n    between, first, last\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\nlibrary(mapview)\n\ndir\n\n# dir with data\ndata_path &lt;- system.file(\"extdata/poa\", package = \"r5r\")\n\n# data_path &lt;- 'C:://user/my_data'\n\nlist.files(data_path)\n\n[1] \"fares\"                      \"network_settings.json\"     \n[3] \"poa_elevation.tif\"          \"poa_eptc.zip\"              \n[5] \"poa_hexgrid.csv\"            \"poa_osm.pbf\"               \n[7] \"poa_points_of_interest.csv\" \"poa_trensurb.zip\"          \n\nbrowseURL(data_path)\n\n\nbuild network ————————————————————–\n\nr5r_core &lt;- setup_r5(data_path)\n\nUsing cached R5 version from C:\\Users\\user\\AppData\\Local/R/cache/R/r5r/r5_jar_v7.1.0/r5-v7.1-all.jar\n\n\n\nFinished building network.dat at R:/Dropbox/git/access_workshop_WSTLUR_2024/renv/library/R-4.3/x86_64-w64-mingw32/r5r/extdata/poa/network.dat\n\nr5r_core\n\n[1] \"Java-Object{org.ipea.r5r.R5RCore@287d7816}\"\n\n\n\n\nexplore data ————————————————————–\n\n# read all points in the city\npoints &lt;- fread(file.path(data_path, \"poa_hexgrid.csv\"))\n\nhead(points)\n\n                id       lon       lat population schools  jobs healthcare\n            &lt;char&gt;     &lt;num&gt;     &lt;num&gt;      &lt;int&gt;   &lt;int&gt; &lt;int&gt;      &lt;int&gt;\n1: 89a901291abffff -51.15825 -30.05385          0       0  1214          0\n2: 89a9012a3cfffff -51.21187 -30.10058        159       0     0          0\n3: 89a901295b7ffff -51.16521 -30.07544       1008       0     3          1\n4: 89a901284a3ffff -51.20535 -30.09005         92       0     0          0\n5: 89a9012809bffff -51.19575 -30.07839        577       0     9          0\n6: 89a901285cfffff -51.21108 -30.08124       1170       0   427          0\n\n# retrieve polygons of H3 spatial grid\ngrid &lt;- h3jsr::cell_to_polygon(points$id, simple = FALSE)\n\nhead(grid)\n\nSimple feature collection with 6 features and 1 field\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -51.21389 ymin: -30.10204 xmax: -51.15622 ymax: -30.05238\nGeodetic CRS:  WGS 84\n       h3_address                       geometry\n1 89a901291abffff POLYGON ((-51.15729 -30.055...\n2 89a9012a3cfffff POLYGON ((-51.21091 -30.102...\n3 89a901295b7ffff POLYGON ((-51.16425 -30.076...\n4 89a901284a3ffff POLYGON ((-51.2044 -30.0915...\n5 89a9012809bffff POLYGON ((-51.1948 -30.0798...\n6 89a901285cfffff POLYGON ((-51.21013 -30.082...\n\n# merge land use data with spatial grid\ngrid_poa &lt;- dplyr::left_join(grid, \n                             points, \n                             by = c('h3_address'='id'))\n\n\n\n# interactive map\nmapview(grid_poa, zcol = 'jobs')\n\n\n\n\n\n\n\nAccess: quick and easy —————————————————–\n\n# routing inputs\nmode &lt;- c(\"walk\", \"transit\")\nmax_walk_time &lt;- 30      # in minutes\ntravel_time_cutoff &lt;- 20 # in minutes\ntime_window &lt;- 30        # in minutes\ndeparture_datetime &lt;- as.POSIXct(\"13-05-2019 14:00:00\",\n                                 format = \"%d-%m-%Y %H:%M:%S\")\n\n\n\n\n\n# calculate accessibility\naccess1 &lt;- r5r::accessibility(r5r_core,\n                              origins = points,\n                              destinations = points, \n                              mode = mode,\n                              opportunities_colnames = c(\"jobs\", \"schools\"),\n                              decay_function = \"step\",\n                              cutoffs = travel_time_cutoff,\n                              departure_datetime = departure_datetime,\n                              max_walk_time = max_walk_time,\n                              time_window = time_window,\n\n                              progress = TRUE\n                              )\n\nhead(access1)\n\n                id opportunity percentile cutoff accessibility\n            &lt;char&gt;      &lt;char&gt;      &lt;int&gt;  &lt;int&gt;         &lt;num&gt;\n1: 89a901291abffff        jobs         50     20          5958\n2: 89a901291abffff     schools         50     20             3\n3: 89a9012a3cfffff        jobs         50     20           432\n4: 89a9012a3cfffff     schools         50     20             0\n5: 89a901295b7ffff        jobs         50     20           665\n6: 89a901295b7ffff     schools         50     20             6"
+  },
+  {
+    "objectID": "2_part.html",
+    "href": "2_part.html",
+    "title": "access_workshop_WSTLUR_2024",
+    "section": "",
+    "text": "test parte2\n\n# allocating memory to java\noptions(java.parameters = \"-Xmx6G\")\n\nlibrary(r5r)\n\nPlease make sure you have already allocated some memory to Java by running:\n  options(java.parameters = '-Xmx2G').\nYou should replace '2G' by the amount of memory you'll require. Currently, Java memory is set to -Xmx6G\n\nlibrary(accessibility)\nlibrary(ggplot2)\n\n\nAccessibility inequality & poverty ——————————————-\n\n# get data\n\nlibrary(accessibility)\n\n# path to data\ndata_dir &lt;- system.file(\"extdata\", package = \"accessibility\")\n\ntravel_matrix &lt;- readRDS(file.path(data_dir, \"travel_matrix.rds\"))\nland_use_data &lt;- readRDS(file.path(data_dir, \"land_use_data.rds\"))\n\n\n# calculate access\naccess &lt;- cumulative_cutoff(  travel_matrix,\n                              land_use_data,\n                              opportunity = \"jobs\",\n                              travel_cost = \"travel_time\",\n                              cutoff = 30\n                            )\n\nhead(access)\n\n                id  jobs\n            &lt;char&gt; &lt;int&gt;\n1: 89a881a5a2bffff 14561\n2: 89a881a5a2fffff 29452\n3: 89a881a5a67ffff 16647\n4: 89a881a5a6bffff 10700\n5: 89a881a5a6fffff  6669\n6: 89a881a5b03ffff 37029\n\n\n\n\nAccessibility inequality ——————————————-\n\n#\n# Palma = (avereage) Top 10%  / botton 40%\n\npalma &lt;- palma_ratio(\n                      accessibility_data = access,\n                      sociodemographic_data = land_use_data,\n                      opportunity = \"jobs\",\n                      population = \"population\",\n                      income = \"income_per_capita\"\n                    )\n\npalma\n\n   palma_ratio\n         &lt;num&gt;\n1:    3.800465\n\n# concentration index\n\nci &lt;- accessibility::gini_index(\n                          accessibility_data = access,\n                          sociodemographic_data = land_use_data,\n                          opportunity = \"jobs\",\n                          population = \"population\"\n                          #,\n                         # income = \"income_per_capita\"\n                          # , type = \"corrected\"\n                        )\n\nci\n\n   gini_index\n        &lt;num&gt;\n1:  0.4715251\n\n\n\n\nAccessibility poverty ——————————————-\n\npoverty &lt;- fgt_poverty(\n                          accessibility_data =  access,\n                          sociodemographic_data = land_use_data,\n                          opportunity = \"jobs\",\n                          population = \"population\",\n                          poverty_line = 100000\n                        )\n\n\npoverty\n\n        FGT0      FGT1      FGT2\n       &lt;num&gt;     &lt;num&gt;     &lt;num&gt;\n1: 0.5855476 0.3394363 0.2319952\n\n\n\n\ninterpretation\n#’ FGT0: 54% of the pop in poverty #’ FGT1: the accessibility of the poor is on average 33% lower than the poverty line #’ FGT2:"
+  },
+  {
+    "objectID": "index.knit.html",
+    "href": "index.knit.html",
+    "title": "access_workshop_WSTLUR_2024",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2\n\n\n```\nteste slides"
+  },
+  {
+    "objectID": "about.knit.html",
+    "href": "about.knit.html",
+    "title": "About the workshop",
+    "section": "",
+    "text": "A crash course on urban accessibility with R\nWorld Society for Transport and Land Use Research (WSTLUR)\nthe Universidad de Los Andes\nWSTLUR 2024 International Conference\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "References"
+  }
+]

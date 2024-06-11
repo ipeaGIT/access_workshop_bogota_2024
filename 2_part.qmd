@@ -1,0 +1,104 @@
+---
+title: "access_workshop_WSTLUR_2024"
+---
+
+test `parte2`
+
+```{r}
+# allocating memory to java
+options(java.parameters = "-Xmx6G")
+
+library(r5r)
+library(accessibility)
+library(ggplot2)
+
+```
+
+# Accessibility inequality & poverty  -------------------------------------------
+```{r}
+# get data
+
+library(accessibility)
+
+# path to data
+data_dir <- system.file("extdata", package = "accessibility")
+
+travel_matrix <- readRDS(file.path(data_dir, "travel_matrix.rds"))
+land_use_data <- readRDS(file.path(data_dir, "land_use_data.rds"))
+
+
+# calculate access
+access <- cumulative_cutoff(  travel_matrix,
+                              land_use_data,
+                              opportunity = "jobs",
+                              travel_cost = "travel_time",
+                              cutoff = 30
+                            )
+
+head(access)
+```
+
+
+
+
+
+# Accessibility inequality  -------------------------------------------
+```{r}
+#
+# Palma = (avereage) Top 10%  / botton 40%
+
+palma <- palma_ratio(
+                      accessibility_data = access,
+                      sociodemographic_data = land_use_data,
+                      opportunity = "jobs",
+                      population = "population",
+                      income = "income_per_capita"
+                    )
+
+palma
+
+
+
+
+
+# concentration index
+
+ci <- accessibility::gini_index(
+                          accessibility_data = access,
+                          sociodemographic_data = land_use_data,
+                          opportunity = "jobs",
+                          population = "population"
+                          #,
+                         # income = "income_per_capita"
+                          # , type = "corrected"
+                        )
+
+ci
+
+
+
+
+
+```
+
+# Accessibility poverty  -------------------------------------------
+```{r}
+poverty <- fgt_poverty(
+                          accessibility_data =  access,
+                          sociodemographic_data = land_use_data,
+                          opportunity = "jobs",
+                          population = "population",
+                          poverty_line = 100000
+                        )
+
+
+poverty
+```
+
+
+
+# interpretation
+
+#' FGT0: 54% of the pop in poverty
+#' FGT1: the accessibility of the poor is on average 33% lower than the poverty line
+#' FGT2: 

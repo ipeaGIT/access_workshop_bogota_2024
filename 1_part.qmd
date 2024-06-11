@@ -1,0 +1,112 @@
+---
+title: "access_workshop_WSTLUR_2024"
+---
+
+test `parte1`
+
+```{r}
+# allocating memory to java
+options(java.parameters = "-Xmx6G")
+
+library(r5r)
+library(accessibility)
+library(sf)
+library(data.table)
+library(ggplot2)
+library(h3jsr)
+library(dplyr)
+
+library(mapview)
+
+```
+
+dir
+```{r}
+# dir with data
+data_path <- system.file("extdata/poa", package = "r5r")
+
+# data_path <- 'C:://user/my_data'
+
+list.files(data_path)
+
+browseURL(data_path)
+
+```
+
+
+
+
+# build network  --------------------------------------------------------------
+```{r}
+r5r_core <- setup_r5(data_path)
+
+
+r5r_core
+```
+
+
+
+
+# explore data  --------------------------------------------------------------
+```{r}
+# read all points in the city
+points <- fread(file.path(data_path, "poa_hexgrid.csv"))
+
+head(points)
+
+
+# retrieve polygons of H3 spatial grid
+grid <- h3jsr::cell_to_polygon(points$id, simple = FALSE)
+
+head(grid)
+
+
+
+# merge land use data with spatial grid
+grid_poa <- dplyr::left_join(grid, 
+                             points, 
+                             by = c('h3_address'='id'))
+
+
+
+# interactive map
+mapview(grid_poa, zcol = 'jobs')
+
+```
+
+
+
+# Access: quick and easy -----------------------------------------------------
+```{r}
+
+# routing inputs
+mode <- c("walk", "transit")
+max_walk_time <- 30      # in minutes
+travel_time_cutoff <- 20 # in minutes
+time_window <- 30        # in minutes
+departure_datetime <- as.POSIXct("13-05-2019 14:00:00",
+                                 format = "%d-%m-%Y %H:%M:%S")
+
+
+
+
+
+# calculate accessibility
+access1 <- r5r::accessibility(r5r_core,
+                              origins = points,
+                              destinations = points, 
+                              mode = mode,
+                              opportunities_colnames = c("jobs", "schools"),
+                              decay_function = "step",
+                              cutoffs = travel_time_cutoff,
+                              departure_datetime = departure_datetime,
+                              max_walk_time = max_walk_time,
+                              time_window = time_window,
+
+                              progress = TRUE
+                              )
+
+head(access1)
+
+
+```

@@ -1,19 +1,46 @@
 project:
   type: website
 
+execute:
+  freeze: auto
+
+lang: en
 website:
-  title: "access_workshop_WSTLUR_2024"
+  title: "A crash course on urban accessibility with R"
+  favicon: images/favicon.png
   navbar:
     left:
+      - about.qmd
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: 1_part.qmd
+        text: part 1
+      - href: 2_part.qmd
+        text: part 2
+      - references.qmd
+
+page-navigation: true
+page-footer: 
+  border: false
+  left: "Copyright 2024, Rafael H. M. Pereira" 
+  right: 
+    - icon: github
+      href: https://github.com/ipeaGIT/access_workshop_WSTLUR_2024
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: cosmo
+      dark: superhero
     css: styles.css
     toc: true
 
-editor: visual
+bibliography: references.bib
+
+editor: source
+
+editor_options:
+  markdown:
+    wrap: 80
+    canonical: true
 
