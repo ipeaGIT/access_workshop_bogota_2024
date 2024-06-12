@@ -1,0 +1,31 @@
+---
+title: "Slides"
+---
+
+# Part 1
+Part 1
+
+<p><embed src="slides/3_calculating_access.pdf" style="width:100.0%;height:100vh;" /></p>
+
+
+# Part 2
+Part 2
+
+
+
+# Part 3
+Part 3
+
+![](slides/3_calculating_access.pdf){width=100% height=100}
+
+# Part 4
+ Part 4
+
+```{=html}
+<object data="slides/3_calculating_access.pdf" type="application/pdf" width="100%" height="100%" style="min-height:100vh;">
+    <p>It appears you don't have a PDF plugin for this browser.
+    No biggie... you can <a href="slides/3_calculating_access.pdf">click here to
+    download the PDF file.</a></p>
+</object>
+```
+5

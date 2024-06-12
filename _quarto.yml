@@ -29,11 +29,13 @@ website:
       - section: "Getting started"
         contents:
           - href: 1_installation.qmd
-      - section: "Advanced"
+      - section: "Calculating accessibility"
         contents:
           - href: 2_quick_approach.qmd
           - href: 3_flexible_approach.qmd
           - href: 4_equity_measures.qmd
+      - section: "Slides"
+      - 5_slides.qmd
 
 page-navigation: true
 page-footer: 
