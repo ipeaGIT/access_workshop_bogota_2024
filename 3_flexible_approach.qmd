@@ -1,0 +1,205 @@
+---
+title: "Flexible"
+execute:
+  eval: false
+---
+
+test `parte1`
+
+```{r, message=FALSE}
+# allocating memory to java
+options(java.parameters = "-Xmx6G")
+
+library(r5r)
+library(accessibility)
+library(sf)
+library(ggplot2)
+library(h3jsr)
+library(dplyr)
+
+library(mapview)
+```
+
+dir
+```{r}
+# dir with data
+data_path <- system.file("extdata/poa", package = "r5r")
+
+# data_path <- 'C:://user/my_data'
+
+list.files(data_path)
+
+browseURL(data_path)
+
+```
+
+
+
+
+# build network  
+```{r}
+r5r_core <- setup_r5(data_path)
+
+
+r5r_core
+```
+
+
+
+
+# explore data  
+```{r}
+# read all points in the city
+points <- read.csv(file.path(data_path, "poa_hexgrid.csv"))
+
+head(points)
+
+
+# retrieve polygons of H3 spatial grid
+grid <- h3jsr::cell_to_polygon(points$id, simple = FALSE)
+
+head(grid)
+
+
+
+# merge land use data with spatial grid
+grid_poa <- dplyr::left_join(grid, 
+                             points, 
+                             by = c('h3_address'='id'))
+
+
+
+# interactive map
+mapview(grid_poa, zcol = 'jobs')
+
+```
+
+
+
+# Accessibility: flexible approach 
+
+```{r, eval = FALSE}
+# routing inputs
+mode <- c("walk", "transit")
+max_walk_time <- 30      # in minutes
+travel_time_cutoff <- 20 # in minutes
+time_window <- 30        # in minutes
+departure_datetime <- as.POSIXct("13-05-2019 14:00:00",
+                                 format = "%d-%m-%Y %H:%M:%S")
+
+
+# Travel time matrix
+# calculate travel time matrix
+ttm <- r5r::travel_time_matrix(r5r_core,
+                               origins = points,
+                               destinations = points,
+                               mode = mode,
+                               departure_datetime = departure_datetime,
+                               max_walk_time = max_walk_time, 
+                               max_trip_duration = 60,
+                               time_window = time_window,
+                               progress = TRUE
+                               )
+head(ttm)
+
+
+
+
+
+
+
+# Now we can use the {accessibility} !
+
+# cumulative accessibility
+cum_access_jobs <- accessibility::cumulative_cutoff(
+                                                    travel_matrix = ttm, 
+                                                    travel_cost = 'travel_time_p50',
+                                                    
+                                                    land_use_data = points,
+                                                    opportunity = 'jobs',
+                                                    cutoff = 30
+                                                    )
+
+head(cum_access_jobs)
+
+
+
+
+# Interval-based cumulative opportunities
+cum_interval <- accessibility::cumulative_interval(
+                                    travel_matrix = ttm,
+                                    land_use_data = points,
+                                    opportunity = "jobs",
+                                    travel_cost = "travel_time_p50",
+                                    interval = c(20, 40)
+                                  )
+
+head(cum_interval)
+
+
+# gravity-based access
+exp_access_jobs <- accessibility::gravity(
+                                          travel_matrix = ttm,
+                                          land_use_data = points,
+                                          opportunity = "schools",
+                                          travel_cost = "travel_time_p50",
+                                          decay_function = decay_exponential(decay_value = 0.8)
+                                          )
+  
+  
+head(exp_access_jobs)
+
+
+
+
+# Accessibility analyses  -------------------------------------------
+
+
+# spatial distribution
+
+# merge accessibility estimates
+access_sf <- left_join(grid, cum_access_jobs, by = c('h3_address'='id'))
+
+```
+
+
+test
+
+```{r}
+# plot
+ggplot() +
+  geom_sf(data = access_sf, aes(fill = jobs), color= NA) +
+  scale_fill_viridis_c(direction = -1, option = 'B') +
+  labs(fill = "Number of\nfacilities within\n20 minutes") +
+  theme_minimal() +
+  theme(axis.title = element_blank()) +
+#  facet_wrap(~opportunity) +
+  theme_void()
+
+```
+
+
+# interactive map
+
+```{r}
+access_sf |>
+#  filter(opportunity == 'jobs') |>
+  mapview(zcol = 'jobs')
+
+
+
+
+transit <- r5r::transit_network_to_sf(r5r_core)
+
+
+stops <- transit$stops
+
+routs <- transit$routes
+
+
+mapview(routs) + stops
+
+
+```
+
+s

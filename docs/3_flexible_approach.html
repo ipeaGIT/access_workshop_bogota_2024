@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>A crash course on urban accessibility with R – Intro to the workshop</title>
+<title>A crash course on urban accessibility with R – Flexible</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -50,7 +64,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./1_installation.html" rel="next">
+<link href="./4_equity_measures.html" rel="next">
+<link href="./2_quick_approach.html" rel="prev">
 <link href="./images/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -103,7 +118,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Intro to the workshop</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2_quick_approach.html">Advanced</a></li><li class="breadcrumb-item"><a href="./3_flexible_approach.html">Flexible</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -133,7 +148,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Intro to the workshop</span></a>
   </div>
 </li>
@@ -171,7 +186,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_flexible_approach.html" class="sidebar-item-text sidebar-link">
+  <a href="./3_flexible_approach.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Flexible</span></a>
   </div>
 </li>
@@ -192,9 +207,10 @@ div.csl-indent {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
   <ul>
-  <li><a href="#workshop-summary" id="toc-workshop-summary" class="nav-link active" data-scroll-target="#workshop-summary">Workshop Summary:</a></li>
-  <li><a href="#reading-material" id="toc-reading-material" class="nav-link" data-scroll-target="#reading-material">Reading material:</a></li>
-  <li><a href="#about-the-instructor" id="toc-about-the-instructor" class="nav-link" data-scroll-target="#about-the-instructor">About the instructor:</a></li>
+  <li><a href="#build-network" id="toc-build-network" class="nav-link active" data-scroll-target="#build-network">build network</a></li>
+  <li><a href="#explore-data" id="toc-explore-data" class="nav-link" data-scroll-target="#explore-data">explore data</a></li>
+  <li><a href="#accessibility-flexible-approach" id="toc-accessibility-flexible-approach" class="nav-link" data-scroll-target="#accessibility-flexible-approach">Accessibility: flexible approach</a></li>
+  <li><a href="#interactive-map" id="toc-interactive-map" class="nav-link" data-scroll-target="#interactive-map">interactive map</a></li>
   </ul>
 </nav>
     </div>
@@ -202,9 +218,9 @@ div.csl-indent {
 <div class="quarto-about-solana column-body">
   <div class="about-entity">
     <div class="entity-contents">
-      <header id="title-block-header" class="quarto-title-block default">
+      <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2_quick_approach.html">Advanced</a></li><li class="breadcrumb-item"><a href="./3_flexible_approach.html">Flexible</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Intro to the workshop</h1>
+<h1 class="title">Flexible</h1>
 </div>
 <div class="quarto-title-meta">
   </div>
@@ -220,78 +236,189 @@ div.csl-indent {
 </div>
       <div class="about-contents"><main class="content" id="quarto-document-content">
 
-<p>This website provides the supporting material for the Workshop <strong>“A crash course on urban accessibility with R”</strong>. The Workshop will be conducted during the <a href="https://evento.uniandes.edu.co/en/wstlur-2024/Home/">2024 WSTLUR</a> (World Symposium on Transport and Land Use Research), which will be hosted by the Universidad de Los Andes, in Bogota, Colombia. The workshop is sponsored by the <a href="https://www.wstlur.org/">World Society Transport and Land Use Research (WSTLUR)</a>.</p>
-<!-- <img src="/images/conference_banner.png" width="600" align="center"> -->
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/conference_banner.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="550"></p>
-</figure>
+<p>test <code>parte1</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># allocating memory to java</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">java.parameters =</span> <span class="st">"-Xmx6G"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(r5r)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(accessibility)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(h3jsr)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="workshop-summary" class="level1">
-<h1>Workshop Summary:</h1>
-<p>Routing and accessibility analyses are increasingly used in urban and transport research and planning. In this workshop, you will learn how to estimate travel time matrices and perform accessibility analyzes in multimodal transport networks using the <a href="https://ipeagit.github.io/r5r/">{r5r}</a> and <a href="https://ipeagit.github.io/accessibility/">{accessibility}</a> packages in the <code>R</code> programming language.</p>
-<p>The workshop will also illustrate how to calculate different measures of <em>inequality</em> of access to opportunities and accessibility <em>poverty</em>, which are crucial to assess the accessibility impacts of transportation projects from a transportation equity perspective. The course is based on the book <a href="https://ipeagit.github.io/intro_access_book/">“Introduction to urban accessibility: a practical guide with R”</a>.</p>
-<!-- package logos side by side  -->
-<div style="text-align: center">
-<table>
-<tbody><tr>
-<td>
-<img src="./images/r5r_logo.png" width="220">
-</td>
-<td>
-<img src="./images/accessibility_logo.png" width="220">
-</td>
-</tr>
-</tbody></table>
+<p>dir</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dir with data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/poa"</span>, <span class="at">package =</span> <span class="st">"r5r"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># data_path &lt;- 'C:://user/my_data'</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(data_path)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">browseURL</span>(data_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-simple callout-important">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>This workshop assumes the attendee has a basic knowledge of the R programming language. If you want to familiarize yourself with it, we recommend the books below:</p>
-<ul>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
-<li><a href="https://geocompr.robinlovelace.net/">Geocomputation with R</a></li>
-<li><a href="https://livro.curso-r.com/">Data Science in R</a> (in Portuguese)</li>
-</ul>
-</div>
-</div>
+<section id="build-network" class="level1">
+<h1>build network</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>r5r_core <span class="ot">&lt;-</span> <span class="fu">setup_r5</span>(data_path)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>r5r_core</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="reading-material" class="level1">
-<h1>Reading material:</h1>
-<p>Extra reading material relevant (but not required) for the workshop.</p>
-<ul>
-<li>Online book <a href="https://ipeagit.github.io/intro_access_book/">“Introduction to urban accessibility a practical guide with R”</a> (Chapters 3 and 6).</li>
-<li>The <code>{accessibility}</code> package <a href="https://ipeagit.github.io/accessibility/">website and documentation</a>.</li>
-<li>The <code>{r5r}</code> package <a href="https://ipeagit.github.io/r5r/">website and documentation</a>.</li>
-<li>Paper of the <code>{r5r}</code> package, by <span class="citation" data-cites="pereira2021r5r">Pereira et al. (<a href="#ref-pereira2021r5r" role="doc-biblioref">2021</a>)</span>.</li>
-<li>Paper on transportation equity measures, by <span class="citation" data-cites="karner2024advances">Karner, Pereira, and Farber (<a href="#ref-karner2024advances" role="doc-biblioref">2024</a>)</span>.</li>
-<li>Transport Access Manual, by <span class="citation" data-cites="levinson2020transport">Levinson and King (<a href="#ref-levinson2020transport" role="doc-biblioref">2020</a>)</span>.</li>
-</ul>
+<section id="explore-data" class="level1">
+<h1>explore data</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read all points in the city</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(data_path, <span class="st">"poa_hexgrid.csv"</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(points)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># retrieve polygons of H3 spatial grid</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> h3jsr<span class="sc">::</span><span class="fu">cell_to_polygon</span>(points<span class="sc">$</span>id, <span class="at">simple =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(grid)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># merge land use data with spatial grid</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>grid_poa <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(grid, </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                             points, </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                             <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'h3_address'</span><span class="ot">=</span><span class="st">'id'</span>))</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># interactive map</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(grid_poa, <span class="at">zcol =</span> <span class="st">'jobs'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="about-the-instructor" class="level1">
-<h1>About the instructor:</h1>
-<p><strong>Rafael H. M. Pereira</strong> <br> <em>Head of Data Science</em> <br> Institute for Applied Economic Research (Ipea), Brazil <br> <a href="https://www.urbandemographics.org/about/">Website</a> | <a href="https://scholar.google.com.br/citations?user=dbRivsEAAAAJ&amp;hl">Google Scholar</a> | <a href="https://x.com/UrbanDemog">Twitter</a> | <a href="https://www.linkedin.com/in/rafael-h-m-pereira/">Linkedin</a> |</p>
-<p><strong>Short bio of the instructor:</strong></p>
-<p>Rafael H. M. Pereira is a senior researcher in the fields of urban analytics, spatial data science and transport studies at the Institute for Applied Economic Research (Ipea), Brazil. His research looks broadly at how urban policies and technologies shape the spatial organization of cities, human mobility as well as their impacts on social and health inequalities. Some of his key contributions to the fields of urban analytics and planning involve the development of new methods and open-source computational tools to the study of urban systems and transportation networks. These contributions emerge from substantive interests around social justice and sustainability issues in urban development, with particular focus on transportation equity and inequalities in access to opportunities, and the environmental impacts of built environments and mobility patterns. With a background in Sociology and Demography, Dr.&nbsp;Pereira obtained his PhD in Geography from the Transport Studies Unit at Oxford University.</p>
-
+<section id="accessibility-flexible-approach" class="level1">
+<h1>Accessibility: flexible approach</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># routing inputs</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mode <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"walk"</span>, <span class="st">"transit"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>max_walk_time <span class="ot">&lt;-</span> <span class="dv">30</span>      <span class="co"># in minutes</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>travel_time_cutoff <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># in minutes</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>time_window <span class="ot">&lt;-</span> <span class="dv">30</span>        <span class="co"># in minutes</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>departure_datetime <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(<span class="st">"13-05-2019 14:00:00"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">format =</span> <span class="st">"%d-%m-%Y %H:%M:%S"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Travel time matrix</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate travel time matrix</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>ttm <span class="ot">&lt;-</span> r5r<span class="sc">::</span><span class="fu">travel_time_matrix</span>(r5r_core,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                               <span class="at">origins =</span> points,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                               <span class="at">destinations =</span> points,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>                               <span class="at">mode =</span> mode,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                               <span class="at">departure_datetime =</span> departure_datetime,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                               <span class="at">max_walk_time =</span> max_walk_time, </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                               <span class="at">max_trip_duration =</span> <span class="dv">60</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                               <span class="at">time_window =</span> time_window,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                               <span class="at">progress =</span> <span class="cn">TRUE</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                               )</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ttm)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we can use the {accessibility} !</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co"># cumulative accessibility</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>cum_access_jobs <span class="ot">&lt;-</span> accessibility<span class="sc">::</span><span class="fu">cumulative_cutoff</span>(</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">travel_matrix =</span> ttm, </span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">travel_cost =</span> <span class="st">'travel_time_p50'</span>,</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>                                                    </span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">land_use_data =</span> points,</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">opportunity =</span> <span class="st">'jobs'</span>,</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">cutoff =</span> <span class="dv">30</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>                                                    )</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cum_access_jobs)</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Interval-based cumulative opportunities</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>cum_interval <span class="ot">&lt;-</span> accessibility<span class="sc">::</span><span class="fu">cumulative_interval</span>(</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">travel_matrix =</span> ttm,</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">land_use_data =</span> points,</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">opportunity =</span> <span class="st">"jobs"</span>,</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">travel_cost =</span> <span class="st">"travel_time_p50"</span>,</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">40</span>)</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>                                  )</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cum_interval)</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="co"># gravity-based access</span></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>exp_access_jobs <span class="ot">&lt;-</span> accessibility<span class="sc">::</span><span class="fu">gravity</span>(</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">travel_matrix =</span> ttm,</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">land_use_data =</span> points,</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">opportunity =</span> <span class="st">"schools"</span>,</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">travel_cost =</span> <span class="st">"travel_time_p50"</span>,</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">decay_function =</span> <span class="fu">decay_exponential</span>(<span class="at">decay_value =</span> <span class="fl">0.8</span>)</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>                                          )</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(exp_access_jobs)</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="co"># Accessibility analyses  -------------------------------------------</span></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="co"># spatial distribution</span></span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="co"># merge accessibility estimates</span></span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>access_sf <span class="ot">&lt;-</span> <span class="fu">left_join</span>(grid, cum_access_jobs, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'h3_address'</span><span class="ot">=</span><span class="st">'id'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>test</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> access_sf, <span class="fu">aes</span>(<span class="at">fill =</span> jobs), <span class="at">color=</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">option =</span> <span class="st">'B'</span>) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Number of</span><span class="sc">\n</span><span class="st">facilities within</span><span class="sc">\n</span><span class="st">20 minutes"</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  facet_wrap(~opportunity) +</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="interactive-map" class="level1">
+<h1>interactive map</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>access_sf <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  filter(opportunity == 'jobs') |&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mapview</span>(<span class="at">zcol =</span> <span class="st">'jobs'</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>transit <span class="ot">&lt;-</span> r5r<span class="sc">::</span><span class="fu">transit_network_to_sf</span>(r5r_core)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>stops <span class="ot">&lt;-</span> transit<span class="sc">$</span>stops</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>routs <span class="ot">&lt;-</span> transit<span class="sc">$</span>routes</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(routs) <span class="sc">+</span> stops</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>s</p>
 
 
 </section>
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-karner2024advances" class="csl-entry" role="listitem">
-Karner, Alex, Rafael H. M. Pereira, and Steven Farber. 2024. <span>“Advances and Pitfalls in Measuring Transportation Equity.”</span> <em>Transportation</em>, January. <a href="https://doi.org/10.1007/s11116-023-10460-7">https://doi.org/10.1007/s11116-023-10460-7</a>.
-</div>
-<div id="ref-levinson2020transport" class="csl-entry" role="listitem">
-Levinson, David, and David King. 2020. <em>Transport Access Manual: <span>A</span> Guide for Measuring Connection Between People and Places</em>. <span>Committee of the Transport Access Manual, University of Sydney</span>. <a href="https://ses.library.usyd.edu.au/handle/2123/23733">https://ses.library.usyd.edu.au/handle/2123/23733</a>.
-</div>
-<div id="ref-pereira2021r5r" class="csl-entry" role="listitem">
-Pereira, Rafael H. M., Marcus Saraiva, Daniel Herszenhut, Carlos Kaue Vieira Braga, and Matthew Wigginton Conway. 2021. <span>“R5r: <span>Rapid Realistic Routing</span> on <span>Multimodal Transport Networks</span> with <span>R</span><span><sup>5</sup></span> in <span>R</span>.”</span> <em>Transport Findings</em>, March, 21262. <a href="https://doi.org/10.32866/001c.21262">https://doi.org/10.32866/001c.21262</a>.
-</div>
-</div></section></div></main></div>
+</main></div>
     </div>
     <img src="images/conference_logo.jpg" class="about-image
   rounded " style="width: 15em;">
@@ -857,10 +984,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./2_quick_approach.html" class="pagination-link" aria-label="Quick approach">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Quick approach</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./1_installation.html" class="pagination-link" aria-label="Installation">
-        <span class="nav-page-text">Installation</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./4_equity_measures.html" class="pagination-link" aria-label="Equity measures">
+        <span class="nav-page-text">Equity measures</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

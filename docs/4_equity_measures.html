@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>A crash course on urban accessibility with R – Intro to the workshop</title>
+<title>A crash course on urban accessibility with R – access_workshop_WSTLUR_2024</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -50,11 +30,12 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./1_installation.html" rel="next">
+<link href="./3_flexible_approach.html" rel="prev">
 <link href="./images/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
@@ -103,7 +84,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Intro to the workshop</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2_quick_approach.html">Advanced</a></li><li class="breadcrumb-item"><a href="./4_equity_measures.html">Equity measures</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -131,21 +112,21 @@ div.csl-indent {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Intro to the workshop</span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Getting started</span></a>
+ <span class="menu-text">Basics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0_about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./1_installation.html" class="sidebar-item-text sidebar-link">
@@ -177,7 +158,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_equity_measures.html" class="sidebar-item-text sidebar-link">
+  <a href="./4_equity_measures.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Equity measures</span></a>
   </div>
 </li>
@@ -191,113 +172,93 @@ div.csl-indent {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
+   
   <ul>
-  <li><a href="#workshop-summary" id="toc-workshop-summary" class="nav-link active" data-scroll-target="#workshop-summary">Workshop Summary:</a></li>
-  <li><a href="#reading-material" id="toc-reading-material" class="nav-link" data-scroll-target="#reading-material">Reading material:</a></li>
-  <li><a href="#about-the-instructor" id="toc-about-the-instructor" class="nav-link" data-scroll-target="#about-the-instructor">About the instructor:</a></li>
+  <li><a href="#accessibility-inequality-poverty--" id="toc-accessibility-inequality-poverty--" class="nav-link active" data-scroll-target="#accessibility-inequality-poverty--">Accessibility inequality &amp; poverty ——————————————-</a></li>
+  <li><a href="#accessibility-inequality--" id="toc-accessibility-inequality--" class="nav-link" data-scroll-target="#accessibility-inequality--">Accessibility inequality ——————————————-</a></li>
+  <li><a href="#accessibility-poverty--" id="toc-accessibility-poverty--" class="nav-link" data-scroll-target="#accessibility-poverty--">Accessibility poverty ——————————————-</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">interpretation</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<div class="quarto-about-solana column-body">
-  <div class="about-entity">
-    <div class="entity-contents">
-      <header id="title-block-header" class="quarto-title-block default">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2_quick_approach.html">Advanced</a></li><li class="breadcrumb-item"><a href="./4_equity_measures.html">Equity measures</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Intro to the workshop</h1>
+<h1 class="title">access_workshop_WSTLUR_2024</h1>
 </div>
+
+
+
 <div class="quarto-title-meta">
+
+    
+  
+    
   </div>
-</header> <div class="about-links">
-  <a href="https://x.com/UrbanDemog" class="about-link" rel="" target="">
-    <i class="bi bi-twitter"></i>
-     <span class="about-link-text">twitter</span>
-  </a>
-  <a href="https://github.com/ipeaGIT/access_workshop_WSTLUR_2024" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-</div>
-      <div class="about-contents"><main class="content" id="quarto-document-content">
+  
 
-<p>This website provides the supporting material for the Workshop <strong>“A crash course on urban accessibility with R”</strong>. The Workshop will be conducted during the <a href="https://evento.uniandes.edu.co/en/wstlur-2024/Home/">2024 WSTLUR</a> (World Symposium on Transport and Land Use Research), which will be hosted by the Universidad de Los Andes, in Bogota, Colombia. The workshop is sponsored by the <a href="https://www.wstlur.org/">World Society Transport and Land Use Research (WSTLUR)</a>.</p>
-<!-- <img src="/images/conference_banner.png" width="600" align="center"> -->
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/conference_banner.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="550"></p>
-</figure>
+
+</header>
+
+
+<p>test <code>parte2</code></p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Please make sure you have already allocated some memory to Java by running:
+  options(java.parameters = '-Xmx2G').
+You should replace '2G' by the amount of memory you'll require. Currently, Java memory is set to -Xmx6G</code></pre>
 </div>
-<section id="workshop-summary" class="level1">
-<h1>Workshop Summary:</h1>
-<p>Routing and accessibility analyses are increasingly used in urban and transport research and planning. In this workshop, you will learn how to estimate travel time matrices and perform accessibility analyzes in multimodal transport networks using the <a href="https://ipeagit.github.io/r5r/">{r5r}</a> and <a href="https://ipeagit.github.io/accessibility/">{accessibility}</a> packages in the <code>R</code> programming language.</p>
-<p>The workshop will also illustrate how to calculate different measures of <em>inequality</em> of access to opportunities and accessibility <em>poverty</em>, which are crucial to assess the accessibility impacts of transportation projects from a transportation equity perspective. The course is based on the book <a href="https://ipeagit.github.io/intro_access_book/">“Introduction to urban accessibility: a practical guide with R”</a>.</p>
-<!-- package logos side by side  -->
-<div style="text-align: center">
-<table>
-<tbody><tr>
-<td>
-<img src="./images/r5r_logo.png" width="220">
-</td>
-<td>
-<img src="./images/accessibility_logo.png" width="220">
-</td>
-</tr>
-</tbody></table>
 </div>
-<div class="callout callout-style-simple callout-important">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>This workshop assumes the attendee has a basic knowledge of the R programming language. If you want to familiarize yourself with it, we recommend the books below:</p>
-<ul>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
-<li><a href="https://geocompr.robinlovelace.net/">Geocomputation with R</a></li>
-<li><a href="https://livro.curso-r.com/">Data Science in R</a> (in Portuguese)</li>
-</ul>
-</div>
+<section id="accessibility-inequality-poverty--" class="level1">
+<h1>Accessibility inequality &amp; poverty ——————————————-</h1>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                id  jobs
+            &lt;char&gt; &lt;int&gt;
+1: 89a881a5a2bffff 14561
+2: 89a881a5a2fffff 29452
+3: 89a881a5a67ffff 16647
+4: 89a881a5a6bffff 10700
+5: 89a881a5a6fffff  6669
+6: 89a881a5b03ffff 37029</code></pre>
 </div>
 </div>
 </section>
-<section id="reading-material" class="level1">
-<h1>Reading material:</h1>
-<p>Extra reading material relevant (but not required) for the workshop.</p>
-<ul>
-<li>Online book <a href="https://ipeagit.github.io/intro_access_book/">“Introduction to urban accessibility a practical guide with R”</a> (Chapters 3 and 6).</li>
-<li>The <code>{accessibility}</code> package <a href="https://ipeagit.github.io/accessibility/">website and documentation</a>.</li>
-<li>The <code>{r5r}</code> package <a href="https://ipeagit.github.io/r5r/">website and documentation</a>.</li>
-<li>Paper of the <code>{r5r}</code> package, by <span class="citation" data-cites="pereira2021r5r">Pereira et al. (<a href="#ref-pereira2021r5r" role="doc-biblioref">2021</a>)</span>.</li>
-<li>Paper on transportation equity measures, by <span class="citation" data-cites="karner2024advances">Karner, Pereira, and Farber (<a href="#ref-karner2024advances" role="doc-biblioref">2024</a>)</span>.</li>
-<li>Transport Access Manual, by <span class="citation" data-cites="levinson2020transport">Levinson and King (<a href="#ref-levinson2020transport" role="doc-biblioref">2020</a>)</span>.</li>
-</ul>
+<section id="accessibility-inequality--" class="level1">
+<h1>Accessibility inequality ——————————————-</h1>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   palma_ratio
+         &lt;num&gt;
+1:    3.800465</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   gini_index
+        &lt;num&gt;
+1:  0.4715251</code></pre>
+</div>
+</div>
 </section>
-<section id="about-the-instructor" class="level1">
-<h1>About the instructor:</h1>
-<p><strong>Rafael H. M. Pereira</strong> <br> <em>Head of Data Science</em> <br> Institute for Applied Economic Research (Ipea), Brazil <br> <a href="https://www.urbandemographics.org/about/">Website</a> | <a href="https://scholar.google.com.br/citations?user=dbRivsEAAAAJ&amp;hl">Google Scholar</a> | <a href="https://x.com/UrbanDemog">Twitter</a> | <a href="https://www.linkedin.com/in/rafael-h-m-pereira/">Linkedin</a> |</p>
-<p><strong>Short bio of the instructor:</strong></p>
-<p>Rafael H. M. Pereira is a senior researcher in the fields of urban analytics, spatial data science and transport studies at the Institute for Applied Economic Research (Ipea), Brazil. His research looks broadly at how urban policies and technologies shape the spatial organization of cities, human mobility as well as their impacts on social and health inequalities. Some of his key contributions to the fields of urban analytics and planning involve the development of new methods and open-source computational tools to the study of urban systems and transportation networks. These contributions emerge from substantive interests around social justice and sustainability issues in urban development, with particular focus on transportation equity and inequalities in access to opportunities, and the environmental impacts of built environments and mobility patterns. With a background in Sociology and Demography, Dr.&nbsp;Pereira obtained his PhD in Geography from the Transport Studies Unit at Oxford University.</p>
-
+<section id="accessibility-poverty--" class="level1">
+<h1>Accessibility poverty ——————————————-</h1>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>        FGT0      FGT1      FGT2
+       &lt;num&gt;     &lt;num&gt;     &lt;num&gt;
+1: 0.5855476 0.3394363 0.2319952</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretation" class="level1">
+<h1>interpretation</h1>
+<p>#’ FGT0: 54% of the pop in poverty #’ FGT1: the accessibility of the poor is on average 33% lower than the poverty line #’ FGT2:</p>
 
 
 </section>
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-karner2024advances" class="csl-entry" role="listitem">
-Karner, Alex, Rafael H. M. Pereira, and Steven Farber. 2024. <span>“Advances and Pitfalls in Measuring Transportation Equity.”</span> <em>Transportation</em>, January. <a href="https://doi.org/10.1007/s11116-023-10460-7">https://doi.org/10.1007/s11116-023-10460-7</a>.
-</div>
-<div id="ref-levinson2020transport" class="csl-entry" role="listitem">
-Levinson, David, and David King. 2020. <em>Transport Access Manual: <span>A</span> Guide for Measuring Connection Between People and Places</em>. <span>Committee of the Transport Access Manual, University of Sydney</span>. <a href="https://ses.library.usyd.edu.au/handle/2123/23733">https://ses.library.usyd.edu.au/handle/2123/23733</a>.
-</div>
-<div id="ref-pereira2021r5r" class="csl-entry" role="listitem">
-Pereira, Rafael H. M., Marcus Saraiva, Daniel Herszenhut, Carlos Kaue Vieira Braga, and Matthew Wigginton Conway. 2021. <span>“R5r: <span>Rapid Realistic Routing</span> on <span>Multimodal Transport Networks</span> with <span>R</span><span><sup>5</sup></span> in <span>R</span>.”</span> <em>Transport Findings</em>, March, 21262. <a href="https://doi.org/10.32866/001c.21262">https://doi.org/10.32866/001c.21262</a>.
-</div>
-</div></section></div></main></div>
-    </div>
-    <img src="images/conference_logo.jpg" class="about-image
-  rounded " style="width: 15em;">
-  </div>
-</div>
- <!-- /main -->
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -462,6 +423,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -857,11 +825,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./3_flexible_approach.html" class="pagination-link" aria-label="Flexible">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Flexible</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./1_installation.html" class="pagination-link" aria-label="Installation">
-        <span class="nav-page-text">Installation</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

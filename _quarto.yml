@@ -2,6 +2,18 @@ project:
   type: website
   output-dir: docs
 
+image: images/conference_logo.jpg
+
+about:
+  template: solana
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://x.com/UrbanDemog
+    - icon: github
+      text: Github
+      href: https://github.com/ipeaGIT/access_workshop_WSTLUR_2024
+
 execute:
   freeze: auto
 
@@ -9,16 +21,19 @@ lang: en
 website:
   title: "A crash course on urban accessibility with R"
   favicon: images/favicon.png
-  navbar:
-    left:
-      - about.qmd
-      - href: index.qmd
-        text: Home
-      - href: 1_part.qmd
-        text: part 1
-      - href: 2_part.qmd
-        text: part 2
-      - references.qmd
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - index.qmd
+      - section: "Getting started"
+        contents:
+          - href: 1_installation.qmd
+      - section: "Advanced"
+        contents:
+          - href: 2_quick_approach.qmd
+          - href: 3_flexible_approach.qmd
+          - href: 4_equity_measures.qmd
 
 page-navigation: true
 page-footer: 
@@ -28,11 +43,12 @@ page-footer:
     - icon: github
       href: https://github.com/ipeaGIT/access_workshop_WSTLUR_2024
 
+
 format:
   html:
     theme:
-      light: cosmo
-      dark: superhero
+      light: zephyr
+      dark: slate
     css: styles.css
     toc: true
 
@@ -42,6 +58,6 @@ editor: source
 
 editor_options:
   markdown:
-    wrap: 80
+    wrap: 72
     canonical: true
 

@@ -1,15 +1,51 @@
 ---
-title: "access_workshop_WSTLUR_2024"
+title: "Intro to the workshop"
 ---
 
-This is a Quarto website.
+This website provides the supporting material for the Workshop **"A crash course on urban accessibility with R"**. The Workshop will be conducted during the [2024 WSTLUR](https://evento.uniandes.edu.co/en/wstlur-2024/Home/) (World Symposium on Transport and Land Use Research), which will be hosted by the Universidad de Los Andes, in Bogota, Colombia. The workshop is sponsored by the [World Society Transport and Land Use Research (WSTLUR)](https://www.wstlur.org/).
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+<!-- <img src="/images/conference_banner.png" width="600" align="center"> --> 
+![](images/conference_banner.png){width=550 fig-align="center"}
 
-```{r}
-1 + 1
-```
+# Workshop Summary:
 
-\`\`\`
+Routing and accessibility analyses are increasingly used in urban and transport research and planning. In this workshop, you will learn how to estimate travel time matrices and perform accessibility analyzes in multimodal transport networks using the [{r5r}](https://ipeagit.github.io/r5r/) and [{accessibility}](https://ipeagit.github.io/accessibility/) packages in the `R` programming language.
 
-teste slides
+The workshop will also illustrate how to calculate different measures of *inequality* of access to opportunities and accessibility *poverty*, which are crucial to assess the accessibility impacts of transportation projects from a transportation equity perspective. The course is based on the book [“Introduction to urban accessibility: a practical guide with R”](https://ipeagit.github.io/intro_access_book/).
+
+<!-- package logos side by side  -->
+<div style="text-align: center">
+
+<table><tr><td><img src='/images/r5r_logo.png' width="220"></td><td><img src='/images/accessibility_logo.png' width="220"></td></tr></table>
+
+</div>
+
+::: {.callout-important appearance="simple"}
+This workshop assumes the attendee has a basic knowledge of the R programming language. If you want to familiarize yourself with it, we recommend the books below:
+
+- [R for Data Science](https://r4ds.had.co.nz/)
+- [Geocomputation with R](https://geocompr.robinlovelace.net/)
+- [Data Science in R](https://livro.curso-r.com/) (in Portuguese)
+:::
+
+# Reading material:
+
+Extra reading material relevant (but not required) for the workshop.
+
+- Online book [“Introduction to urban accessibility a practical guide with R”](https://ipeagit.github.io/intro_access_book/) (Chapters 3 and 6).
+- The `{accessibility}` package  [website and documentation](https://ipeagit.github.io/accessibility/ ).
+- The `{r5r}` package [website and documentation](https://ipeagit.github.io/r5r/).
+- Paper of the `{r5r}` package, by @pereira2021r5r.
+- Paper on transportation equity measures, by @karner2024advances.
+- Transport Access Manual, by @levinson2020transport.
+
+# About the instructor:
+
+**Rafael H. M. Pereira** <br> *Head of Data Science* <br> Institute for Applied Economic Research (Ipea), Brazil <br> [Website](https://www.urbandemographics.org/about/) | [Google Scholar](https://scholar.google.com.br/citations?user=dbRivsEAAAAJ&hl)
+| [Twitter](https://x.com/UrbanDemog) | [Linkedin](https://www.linkedin.com/in/rafael-h-m-pereira/) | 
+
+
+**Short bio of the instructor:**
+
+Rafael H. M. Pereira is a senior researcher in the fields of urban analytics, spatial data science and transport studies at the Institute for Applied Economic Research (Ipea), Brazil. His research looks broadly at how urban policies and technologies shape the spatial organization of cities, human mobility as well as their impacts on social and health inequalities. Some of his key contributions to the fields of urban analytics and planning involve the development of new methods and open-source computational tools to the study of urban systems and transportation networks. These contributions emerge from substantive interests around social justice and sustainability issues in urban development, with particular focus on transportation equity and inequalities in access to opportunities, and the environmental impacts of built environments and mobility patterns. With a background in Sociology and Demography, Dr. Pereira obtained his PhD in Geography from the Transport Studies Unit at Oxford University.
+
