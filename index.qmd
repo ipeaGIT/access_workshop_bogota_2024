@@ -20,6 +20,11 @@ The workshop will also illustrate how to calculate different measures of *inequa
 
 </div>
 
+
+Here are a few introductory slides explaining we will cover and what we *do not* cover in this workshop:
+
+<p><embed src="slides/1_intro.pdf" style="width:100.0%;height:100vh;" /></p>
+
 ::: {.callout-important appearance="simple"}
 This workshop assumes the attendee has a basic knowledge of the R programming language. If you want to familiarize yourself with it, we recommend the books below:
 

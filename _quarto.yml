@@ -28,7 +28,8 @@ website:
       - index.qmd
       - section: "Getting started"
         contents:
-          - href: 1_installation.qmd
+          - href: 1.1_installation.qmd
+          - href: 1.2_data_requirements.qmd
       - section: "Calculating accessibility"
         contents:
           - href: 2_quick_approach.qmd

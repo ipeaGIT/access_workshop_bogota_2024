@@ -1,0 +1,31 @@
+---
+title: "Data requirements"
+---
+
+In order to conduct transport routing and accessibility analysis using the `{r5r}` package, you will need a few input data sets:
+
+- A road network from OpenStreetMap in `.pbf `format (*mandatory*).
+- A public transport feed in` GTFS.zip` format (optional).
+- A raster file with Digital Elevation Model data in `.tif` format (optional).
+- Some data on the spatial distribution of population and/or activities such as employment, schools, health care facilities.
+
+
+All the data we'll use in this workhop is provided with the code exercises. However, here is  where you can download these data sets for other places. See also slides below.
+
+- **Street network** (mandatory):
+  - [{osmextract}](https://docs.ropensci.org/osmextract/), R package;
+  - [Geofabrik](https://download.geofabrik.de/), website;
+  - [HOT Export Tool](https://export.hotosm.org/), website;
+  - [BBBike Extract Service](https://extract.bbbike.org/), website.
+  - [Protomaps](https://protomaps.com/downloads/osm) website
+
+- **Public transport network** (optional):
+  - [{tidytransit}](https://r-transit.github.io/tidytransit/), R package;
+  - [Transitland](https://www.transit.land/), website;
+  - [Mobility Database](https://database.mobilitydata.org/) website
+
+- **Topography** (optional):
+  - [{elevatr}](https://github.com/jhollist/elevatr), R package;
+  - Nasa's [SRTMGL1](https://lpdaac.usgs.gov/products/srtmgl1v003/), website.
+
+<p><embed src="slides/2_data_requirements.pdf" style="width:100.0%;height:100vh;" /></p>

@@ -4,7 +4,10 @@ execute:
   eval: false
 ---
 
-test `parte1`
+
+These data sets should be saved in a single directory, which should preferably not contain any other files. As we will see below, `{r5r}` combines all the data saved in this directory to create a multimodal transport network that is used for routing trips between origin-destination pairs and, consequently, for calculating travel time matrices. Please note that you can have more than one GTFS file in the same directory, in which case `{r5r}` considers the public transport networks of all feeds together. The street network and the topography of the study area, however, must be each one described by a single file. Assuming that R scripts are saved in a directory called `R`, a possible file structure is shown below:
+
+
 
 ```{r, message=FALSE}
 # allocating memory to java
