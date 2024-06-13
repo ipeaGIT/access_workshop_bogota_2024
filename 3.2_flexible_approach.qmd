@@ -1,6 +1,5 @@
 ---
 title: "Flexible approach"
-
 ---
 
 In the the previous section, we learned a 'quick approach' to calculate accessibility directly from within `{r5r}`. The shortcoming of this approach it that is limited to only a few predefined accessibility metrics available in `{r5r}`. Oftentimes, we want to analyze other types of accessibility metrics and/or to have more control of the different steps of the analysis.
@@ -66,14 +65,15 @@ departure_datetime <- as.POSIXct("13-05-2019 14:00:00",
                                  format = "%d-%m-%Y %H:%M:%S")
 
 # calculate travel time matrix
-ttm <- r5r::travel_time_matrix(r5r_core,
-                               origins = points,
-                               destinations = points,
-                               mode = mode,
-                               departure_datetime = departure_datetime,
-                               max_trip_duration = max_trip_duration,
-                               progress = TRUE
-                               )
+ttm <- r5r::travel_time_matrix(
+  r5r_core = r5r_core,
+  origins = points,
+  destinations = points,
+  mode = mode,
+  departure_datetime = departure_datetime,
+  max_trip_duration = max_trip_duration,
+  progress = TRUE
+  )
 ```
 
 

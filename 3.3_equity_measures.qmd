@@ -4,7 +4,9 @@ execute:
   eval: false
 ---
 
-test `parte2`
+Coming soon
+
+<!-- package logos side by side  
 
 ```{r}
 # allocating memory to java
@@ -104,3 +106,9 @@ poverty
 #' FGT0: 54% of the pop in poverty
 #' FGT1: the accessibility of the poor is on average 33% lower than the poverty line
 #' FGT2: 
+#' 
+#' 
+#' 
+
+
+-->
