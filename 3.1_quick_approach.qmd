@@ -1,0 +1,130 @@
+---
+title: "Quick approach"
+---
+
+In this first hands-on section of the workshop, we'll learn a very quick and simple way to calculate spatial accessibility using the `{r5r}` package. In the next section, we'll see a more flexible and robust way to do the same thing. Here we'll be calculating the number of schools accessible by public transport within a travel time of up to 20 minutes.
+
+
+### 1. Allocating memory to Java and load packages
+
+First, let's increase the memory available to run Java, which is used by the underlying R5 routing engine. By default, `R` allocates only 512 MB of memory to Java processes. To increase the available memory to 2 GB, for example, we use the following command. Note that this needs to be run ***before*** loading the packages that will be used in our analysis.
+
+```{r}
+options(java.parameters = "-Xmx2G")
+```
+
+Now we can load the packages we'll use in this section:
+
+```{r, message=FALSE}
+library(r5r)
+library(h3jsr)
+library(dplyr)
+library(mapview)
+library(ggplot2)
+```
+
+
+# 2. Quick pick in our sample data
+
+The case study we'll the city of Porto Alegre (Brazil). The `r5r` package brings a small sample data for this city, including the following files:
+
+* An OpenStreetMap network: `poa_osm.pbf`
+* Two public transport GTFS feeds: `poa_eptc.zip` and `poa_trensurb.zip` (buses and trains, respectively)
+* A raster elevation data: `poa_elevation.tif`
+* A data frame with land use data: `poa_hexgrid.csv` file with the centroids of a regular hexagonal grid covering the sample area. The data frame also indicates  the number of residents and schools in each cell. We'll use these points as origins and destinations in our analysis.
+
+These data sets should be saved in a single directory (our `data_path`). Here's how the land use data looks like:
+
+```{r}
+# path to data directory
+data_path <- system.file("extdata/poa", package = "r5r")
+
+# read points data
+points <- read.csv(file.path(data_path, "poa_hexgrid.csv"))
+head(points)
+```
+
+To visualize the spatial distribution of these data, we can retrieve the geometry of the H3 hexagonal grid explore it using an interactive map:
+
+```{r}
+# retrieve polygons of H3 spatial grid
+grid <- h3jsr::cell_to_polygon(points$id, simple = FALSE)
+
+# merge spatial grid with land use data
+grid_poa <- left_join(grid, points,
+                      by = c('h3_address'='id'))
+
+# interactive map
+mapview(grid_poa, zcol = 'population')
+
+```
+
+
+
+# 3. Building routable transport network with `setup_r5()`
+
+Now the first step to calculate our accessibility estimates is to build the multimodal transport network.
+
+```{r, message=FALSE}
+r5r_core <- r5r::setup_r5(data_path, 
+                          verbose = FALSE)
+```
+As you can see, we only need to pass the path to our data directory to the `r5r::setup_r5()` function. The function then combines all the data saved in this directory to create a graph that is used for routing trips between origin-destination pairs and, consequently, for calculating travel time matrices and accessibility.
+
+
+
+# Calculate access: quick and easy 
+
+You can calculate accessibility estimates in a single call using the `r5r::accessibility()` function. It includes different options of decay functions that allows one to calculate traditional cumulative accessibility measures and different gravity-based metrics. The options available include `step`, `exponential`, `fixed_exponential`, `linear` or `logistic`, one of which must be passed to the `decay_function` parameter of the function.
+
+In this example, we calculate the cumulative accessibility of the number of schools and hospitals accessible in less than 20 minutes by public transport. Thus, we'll be using `decay_function = "step"`.
+
+
+```{r}
+# routing inputs
+mode <- c("walk", "transit")
+max_walk_time <- 30      # in minutes
+travel_time_cutoff <- 20 # in minutes
+departure_datetime <- as.POSIXct("13-05-2019 14:00:00",
+                                 format = "%d-%m-%Y %H:%M:%S")
+
+# calculate accessibility
+access1 <- r5r::accessibility(
+  r5r_core,
+  origins = points,
+  destinations = points,
+  mode = mode,
+  opportunities_colnames = c("schools", "healthcare"),
+  decay_function = "step",
+  cutoffs = travel_time_cutoff,
+  departure_datetime = departure_datetime,
+  max_walk_time = max_walk_time,
+  progress = TRUE
+  )
+
+```
+The output is a `data.frame`. Here's how the output looks like:
+
+```{r}
+head(access1)
+
+```
+
+Now it is super simple to merge these accessibility estimates to our spatial grid to visualize these results on a map.    
+
+```{r}
+# merge spatial grid with accessibility estimates
+access_sf <- left_join(grid, access1, by = c('h3_address'='id'))
+
+# plot
+ggplot() +
+  geom_sf(data = access_sf, aes(fill = accessibility), color= NA) +
+  scale_fill_viridis_c(direction = -1, option = 'B') +
+  labs(fill = "Number of\nfacilities within\n20 minutes") +
+  theme_minimal() +
+  theme(axis.title = element_blank()) +
+  facet_wrap(~opportunity) +
+  theme_void()
+
+```
+

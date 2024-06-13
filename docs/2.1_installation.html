@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>A crash course on urban accessibility with R – Data requirements</title>
+<title>A crash course on urban accessibility with R – Installation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./2_quick_approach.html" rel="next">
-<link href="./1.1_installation.html" rel="prev">
+<link href="./2.2_data_requirements.html" rel="next">
+<link href="./index.html" rel="prev">
 <link href="./images/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -75,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar docked fullcontent">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -84,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./1.1_installation.html">Getting started</a></li><li class="breadcrumb-item"><a href="./1.2_data_requirements.html">Data requirements</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2.1_installation.html">2. Getting started</a></li><li class="breadcrumb-item"><a href="./2.1_installation.html">Installation</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -115,13 +149,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Intro to the workshop</span></a>
+ <span class="menu-text">1. Intro to the workshop</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Getting started</span></a>
+ <span class="menu-text">2. Getting started</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -129,13 +163,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1.1_installation.html" class="sidebar-item-text sidebar-link">
+  <a href="./2.1_installation.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Installation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1.2_data_requirements.html" class="sidebar-item-text sidebar-link active">
+  <a href="./2.2_data_requirements.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data requirements</span></a>
   </div>
 </li>
@@ -144,7 +178,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Calculating accessibility</span></a>
+ <span class="menu-text">3. Calculating accessibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -152,19 +186,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_quick_approach.html" class="sidebar-item-text sidebar-link">
+  <a href="./3.1_quick_approach.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quick approach</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_flexible_approach.html" class="sidebar-item-text sidebar-link">
+  <a href="./3.2_flexible_approach.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Flexible</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_equity_measures.html" class="sidebar-item-text sidebar-link">
+  <a href="./3.3_equity_measures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Equity measures</span></a>
   </div>
 </li>
@@ -175,14 +209,23 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+  <ul>
+  <li><a href="#installing-r-and-rstudio" id="toc-installing-r-and-rstudio" class="nav-link active" data-scroll-target="#installing-r-and-rstudio">Installing R and RStudio</a></li>
+  <li><a href="#installing-r-packages" id="toc-installing-r-packages" class="nav-link" data-scroll-target="#installing-r-packages">Installing R packages</a></li>
+  <li><a href="#installing-java-jdk" id="toc-installing-java-jdk" class="nav-link" data-scroll-target="#installing-java-jdk">Installing Java JDK</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <div class="quarto-about-solana column-body">
   <div class="about-entity">
     <div class="entity-contents">
-      <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./1.1_installation.html">Getting started</a></li><li class="breadcrumb-item"><a href="./1.2_data_requirements.html">Data requirements</a></li></ol></nav>
+      <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2.1_installation.html">2. Getting started</a></li><li class="breadcrumb-item"><a href="./2.1_installation.html">Installation</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Data requirements</h1>
+<h1 class="title">Installation</h1>
 </div>
 <div class="quarto-title-meta">
   </div>
@@ -197,40 +240,69 @@ ul.task-list li input[type="checkbox"] {
   </a>
 </div>
       <div class="about-contents"><main class="content" id="quarto-document-content">
-<p>In order to conduct transport routing and accessibility analysis using the <code>{r5r}</code> package, you will need a few input data sets:</p>
-<ul>
-<li>A road network from OpenStreetMap in <code>.pbf</code>format (<em>mandatory</em>).</li>
-<li>A public transport feed in<code>GTFS.zip</code> format (optional).</li>
-<li>A raster file with Digital Elevation Model data in <code>.tif</code> format (optional).</li>
-<li>Some data on the spatial distribution of population and/or activities such as employment, schools, health care facilities.</li>
-</ul>
-<p>All the data we’ll use in this workhop is provided with the code exercises. However, here is where you can download these data sets for other places. See also slides below.</p>
-<ul>
-<li><strong>Street network</strong> (mandatory):
-<ul>
-<li><a href="https://docs.ropensci.org/osmextract/">{osmextract}</a>, R package;</li>
-<li><a href="https://download.geofabrik.de/">Geofabrik</a>, website;</li>
-<li><a href="https://export.hotosm.org/">HOT Export Tool</a>, website;</li>
-<li><a href="https://extract.bbbike.org/">BBBike Extract Service</a>, website.</li>
-<li><a href="https://protomaps.com/downloads/osm">Protomaps</a> website</li>
-</ul></li>
-<li><strong>Public transport network</strong> (optional):
-<ul>
-<li><a href="https://r-transit.github.io/tidytransit/">{tidytransit}</a>, R package;</li>
-<li><a href="https://www.transit.land/">Transitland</a>, website;</li>
-<li><a href="https://database.mobilitydata.org/">Mobility Database</a> website</li>
-</ul></li>
-<li><strong>Topography</strong> (optional):
-<ul>
-<li><a href="https://github.com/jhollist/elevatr">{elevatr}</a>, R package;</li>
-<li>Nasa’s <a href="https://lpdaac.usgs.gov/products/srtmgl1v003/">SRTMGL1</a>, website.</li>
-</ul></li>
-</ul>
+
+<p>A few slides explaining the computational requirements to conduct transport routing and accessibility analysis with <code>R</code> in general:</p>
 <p>
-<embed src="slides/2_data_requirements.pdf" style="width:100.0%;height:100vh;">
+<embed src="slides/2_computational_requirements.pdf" style="width:100.0%;height:100vh;">
 </p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>To follow the workshop, you should have the following programs installed on your machine <strong><em>before</em></strong> the day of the workshop. - R and RStudio - A few R packages - Java JDK 21</p>
+<p>See instrucions below:</p>
+</div>
+</div>
+</div>
+<section id="installing-r-and-rstudio" class="level1">
+<h1>Installing R and RStudio</h1>
+<p>We assume you already have R and RStudio installed in your machine. In case you don’t, <a href="https://posit.co/download/rstudio-desktop/#download">follow these simple instructions here</a>.</p>
+</section>
+<section id="installing-r-packages" class="level1">
+<h1>Installing R packages</h1>
+<p>The workshop uses a few R packages that need to be installed in your machine. The simplest way to do this is running the code below. This might take a few minutes if this is the first time you install these packages.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pkgs_to_install <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'r5r'</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'accessibility'</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'ggplot2'</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'mapview'</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'dplyr'</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'h3jsr'</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'sf'</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                     )</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(pkgs_to_install)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The safest way to replicate the code of this workshop, though, is cloning its <a href="https://github.com/ipeaGIT/access_workshop_WSTLUR_2024">repository</a> locally. This is because this repository uses the <code>{renv}</code> R package to manage the workshop dependencies, which is important to make sure we are using the intended versions of the packages dependencies.</p>
+<p>Once you have cloned the repo and you’ve opened the <code>access_workshop_bogota_2024.Rproj</code> file, you can simply run <code>renv::restore()</code> to install all the package dependencies used in this workshop.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment the line below in case you need to install the {renv} package</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages('renv')</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="installing-java-jdk" class="level1">
+<h1>Installing Java JDK</h1>
+<p>To use the <code>{r5r}</code> package (version v2.0 or higher), you will need to have <em>Java Development Kit (JDK) 21</em> installed on your computer. There are numerous open-source JDK implementations. The easiest way to install JDK is using the new <a href="https://github.com/e-kotov/rJavaEnv">{rJavaEnv}</a> package in R, developed by Egor Kotov (thanks Egor!)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install dev version of {rJavaEnv}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"e-kotov/rJavaEnv"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install JDK 21</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>rJavaEnv<span class="sc">::</span><span class="fu">java_quick_install</span>(<span class="at">version =</span> <span class="dv">21</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                             <span class="at">distribution =</span> <span class="st">'Corretto'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Alternatively, you can manually download and install any of these options:</p>
+<ul>
+<li><a href="https://adoptium.net/">Adoptium/Eclipse Temurin</a></li>
+<li><a href="https://aws.amazon.com/corretto/">Amazon Corretto</a></li>
+<li><a href="https://jdk.java.net/21/">Oracle OpenJDK</a></li>
+</ul>
 
 
+</section>
 </main></div>
     </div>
     <img src="images/conference_logo.jpg" class="about-image
@@ -797,13 +869,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./1.1_installation.html" class="pagination-link" aria-label="Installation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Installation</span>
+      <a href="./index.html" class="pagination-link" aria-label="1. Intro to the workshop">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1. Intro to the workshop</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./2_quick_approach.html" class="pagination-link" aria-label="Quick approach">
-        <span class="nav-page-text">Quick approach</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./2.2_data_requirements.html" class="pagination-link" aria-label="Data requirements">
+        <span class="nav-page-text">Data requirements</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

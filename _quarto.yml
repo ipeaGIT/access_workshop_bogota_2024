@@ -2,8 +2,6 @@ project:
   type: website
   output-dir: docs
 
-image: images/conference_logo.jpg
-
 about:
   template: solana
   links:
@@ -20,23 +18,21 @@ execute:
 lang: en
 website:
   title: "A crash course on urban accessibility with R"
-  favicon: images/favicon.png
+  favicon: conference_logo.jpg
   sidebar:
     style: "docked"
     search: true
     contents:
       - index.qmd
-      - section: "Getting started"
+      - section: "2. Getting started"
         contents:
-          - href: 1.1_installation.qmd
-          - href: 1.2_data_requirements.qmd
-      - section: "Calculating accessibility"
+          - href: 2.1_installation.qmd
+          - href: 2.2_data_requirements.qmd
+      - section: "3. Calculating accessibility"
         contents:
-          - href: 2_quick_approach.qmd
-          - href: 3_flexible_approach.qmd
-          - href: 4_equity_measures.qmd
-      - section: "Slides"
-      - 5_slides.qmd
+          - href: 3.1_quick_approach.qmd
+          - href: 3.2_flexible_approach.qmd
+          - href: 3.3_equity_measures.qmd
 
 page-navigation: true
 page-footer: 
