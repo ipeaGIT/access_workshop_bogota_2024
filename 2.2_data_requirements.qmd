@@ -10,7 +10,7 @@ In order to conduct transport routing and accessibility analysis using the `{r5r
 - Some data on the spatial distribution of population and/or activities such as employment, schools, health care facilities.
 
 
-All the data we'll use in this workhop is provided with the code exercises. However, here is  where you can download these data sets for other places. See also slides below.
+All the data we'll use in this workshop is provided with the code exercises. However, here is  where you can download these data sets for other places. See also slides below.
 
 - **Street network** (mandatory):
   - [{osmextract}](https://docs.ropensci.org/osmextract/), R package;

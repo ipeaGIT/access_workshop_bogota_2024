@@ -13,7 +13,7 @@ To follow the workshop, you should have the following programs installed on your
 - A few R packages
 - Java JDK 21
 
-See instrucions below:
+See instructions below:
 :::
 
 # Installing R and RStudio
