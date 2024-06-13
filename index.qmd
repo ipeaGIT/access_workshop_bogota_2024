@@ -16,7 +16,7 @@ The workshop will also illustrate how to calculate different measures of *inequa
 <!-- package logos side by side  -->
 <div style="text-align: center">
 
-<table><tr><td><img src='/images/r5r_logo.png' width="220"></td><td><img src='/images/accessibility_logo.png' width="220"></td></tr></table>
+<table><tr><td><img src='/images/r5r_logo.png' width="180"></td><td><img src='/images/accessibility_logo.png' width="180"></td></tr></table>
 
 </div>
 

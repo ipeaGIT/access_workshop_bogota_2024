@@ -18,7 +18,7 @@ execute:
 lang: en
 website:
   title: "A crash course on urban accessibility with R"
-  favicon: conference_logo.jpg
+  favicon: favicon.jpg
   sidebar:
     style: "docked"
     search: true
