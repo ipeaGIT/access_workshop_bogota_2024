@@ -37,7 +37,7 @@ library(ggplot2)
 
 First, we build the multimodal transport network by passing the path of our data dirctory to the `r5r::setup_r5()` function.
 
-```{r}
+```{r, message=FALSE}
 # path to data directory
 data_path <- system.file("extdata/poa", package = "r5r")
 
@@ -52,7 +52,6 @@ r5r_core <- r5r::setup_r5(data_path,
 The second step is to calculate a travel time matrix with door-to-door travel tim estimates from all origins to all destinations. To do this, we use the `r5r::travel_time_matrix()` function.
 
 As basic inputs, this function receives the routable network created above, origin and destination points as `data.frames` with columns `id`, `lon` and `lat`, the transportation mode and the departure time.
-
 
 ```{r}
 # read points data
@@ -76,7 +75,6 @@ ttm <- r5r::travel_time_matrix(
   )
 ```
 
-
 ::: {.callout-tip}
 ## Tip
 Note that the `r5r::travel_time_matrix()` includes several additional parameters, which allows one to specify the characteristics of trips, including a maximun walking time, a departure time window, the maximum number of public transport legs allowed, etc.
@@ -84,9 +82,7 @@ Note that the `r5r::travel_time_matrix()` includes several additional parameters
 For more info, check the documentation of the function by calling `?r5r::travel_time_matrix` in your R Console or check the documentation on [{r5r} website](https://ipeagit.github.io/r5r/reference/travel_time_matrix.html).
 :::
 
-
 The output is a `data.frame`, which looks like this. It is a matrix in long format indicating the travel time (in minutes) for each origin-destination pair.
-
 
 ```{r}
 head(ttm)
@@ -102,59 +98,45 @@ The `travel_time_matrix()` function uses an extension of the RAPTOR routing algo
 
 # 3. Calculate acessibility 
 
+<img align="right" src="/images/acessibility_logo.png?raw=true" alt="logo" width="140"> 
+
+Having computed the travel time matrix, we can combine it with land use data to calculate accessibility. For this, we will use the `{accessibility}` package, which provides  functions to calculate many accessibility measures. 
+
+As basic inputs, all functions of the `{accessibility}` package require a pre-calculated cost matrix (in our case, a travel time matrix) and some land use data with the number of opportunities (e.g. location of schools, jobs) in each cell that covers the study area.
+
+These 
+
+Ivone Lopes Batista <ivone.batista@ibge.gov.br>;
+
+
+
+
 
 ```{r}
-# Now we can use the {accessibility} !
-
 # cumulative accessibility
-cum_access_jobs <- accessibility::cumulative_cutoff(
-                                                    travel_matrix = ttm, 
-                                                    travel_cost = 'travel_time_p50',
-                                                    
-                                                    land_use_data = points,
-                                                    opportunity = 'jobs',
-                                                    cutoff = 30
-                                                    )
-
-head(cum_access_jobs)
-
-
-
-
-# Interval-based cumulative opportunities
-cum_interval <- accessibility::cumulative_interval(
-                                    travel_matrix = ttm,
-                                    land_use_data = points,
-                                    opportunity = "jobs",
-                                    travel_cost = "travel_time_p50",
-                                    interval = c(20, 40)
-                                  )
-
-head(cum_interval)
-
-
-# gravity-based access
-exp_access_jobs <- accessibility::gravity(
-                                          travel_matrix = ttm,
-                                          land_use_data = points,
-                                          opportunity = "schools",
-                                          travel_cost = "travel_time_p50",
-                                          decay_function = decay_exponential(decay_value = 0.8)
-                                          )
+access_cum <- accessibility::cumulative_cutoff(
+  travel_matrix = ttm, 
+  travel_cost = 'travel_time_p50',
+  land_use_data = points,
+  opportunity = 'schools',
+  cutoff = 20
+  )
   
-  
-head(exp_access_jobs)
+head(access_cum)
 
 
+```
 
-
-# Accessibility analyses  -------------------------------------------
 
 
 # spatial distribution
+```{r}
+# retrieve polygons of H3 spatial grid
+grid <- h3jsr::cell_to_polygon(points$id, simple = FALSE)
+
 
 # merge accessibility estimates
-access_sf <- left_join(grid, cum_access_jobs, by = c('h3_address'='id'))
+access_sf <- left_join(grid, access_cum, by = c('h3_address'='id'))
 
 ```
 
@@ -164,7 +146,7 @@ test
 ```{r}
 # plot
 ggplot() +
-  geom_sf(data = access_sf, aes(fill = jobs), color= NA) +
+  geom_sf(data = access_sf, aes(fill = schools), color= NA) +
   scale_fill_viridis_c(direction = -1, option = 'B') +
   labs(fill = "Number of\nfacilities within\n20 minutes") +
   theme_minimal() +

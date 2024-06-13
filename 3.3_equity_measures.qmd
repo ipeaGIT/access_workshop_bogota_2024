@@ -1,7 +1,5 @@
 ---
 title: "Equity measures"
-execute:
-  eval: false
 ---
 
 Coming soon
@@ -18,7 +16,8 @@ library(ggplot2)
 
 ```
 
-# Accessibility inequality & poverty  -------------------------------------------
+# Accessibility inequality & poverty
+
 ```{r}
 # get data
 
@@ -46,7 +45,8 @@ head(access)
 
 
 
-# Accessibility inequality  -------------------------------------------
+# Accessibility inequality
+
 ```{r}
 #
 # Palma = (avereage) Top 10%  / botton 40%
@@ -85,7 +85,8 @@ ci
 
 ```
 
-# Accessibility poverty  -------------------------------------------
+# Accessibility poverty
+
 ```{r}
 poverty <- fgt_poverty(
                           accessibility_data =  access,
