@@ -1,5 +1,6 @@
 ---
 title: "Quick approach"
+code-annotations: hover
 ---
 
 <img align="right" src="/images/r5r_logo.png?raw=true" alt="logo" width="140"> 
@@ -32,7 +33,7 @@ The case study we'll the city of Porto Alegre (Brazil). The `{r5r}` package brin
 * An OpenStreetMap network: `poa_osm.pbf`
 * Two public transport GTFS feeds: `poa_eptc.zip` and `poa_trensurb.zip` (buses and trains, respectively)
 * A raster elevation data: `poa_elevation.tif`
-* A data frame with land use data: `poa_hexgrid.csv` file with the centroids of a regular hexagonal grid covering the sample area. The data frame also indicates  the number of residents and schools in each cell. We'll use these points as origins and destinations in our analysis.
+* A data frame with land use data: `poa_hexgrid.csv` file with the centroids of a regular hexagonal grid covering the sample area. The data frame also indicates the number of residents and schools in each cell. We'll use these points as origins and destinations in our analysis.
 
 These data sets should be saved in a single directory (our `data_path`). Here's how the land use data looks like:
 
@@ -87,8 +88,8 @@ Note that to use the `r5r::accessibility()`, the input of `points` must be a `da
 ```{r}
 # routing inputs
 mode <- c("walk", "transit")
-max_walk_time <- 30      # in minutes
-travel_time_cutoff <- 20 # in minutes
+max_walk_time <- 30                                  # <1>
+travel_time_cutoff <- 20                             # <1>
 departure_datetime <- as.POSIXct("13-05-2019 14:00:00",
                                  format = "%d-%m-%Y %H:%M:%S")
 
@@ -98,33 +99,36 @@ access1 <- r5r::accessibility(
   origins = points,
   destinations = points,
   mode = mode,
-  opportunities_colnames = c("schools", "healthcare"),
+  opportunities_colnames = c("schools", "healthcare"), # <2>
   decay_function = "step",
-  cutoffs = travel_time_cutoff,
+  cutoffs = travel_time_cutoff,                        # <3>
   departure_datetime = departure_datetime,
   max_walk_time = max_walk_time,
   progress = TRUE
   )
 
 ```
+1. In minutes
+2. Note you can pass the column of more than one type of opportunity.
+3. Similarly, you could pass more than one time threshold.
 
 ::: {.callout-tip}
 ## Tip
-Note that the `r5r::accessibility()` has several additional parameters. These allow you to specify different characteristics of trips, including a maximun trip duration, walking and cycling speed, level of traffic stress (LTS), etc.
-
-For more info, check the documentation of the function by calling `?r5r::accessibility` in your R Console or check the documentation on [{r5r} website](https://ipeagit.github.io/r5r/reference/accessibility.html).
+Note that the `r5r::accessibility()` function has several additional parameters. These allow you to specify different characteristics of trips, including a maximun trip duration, walking and cycling speed, level of traffic stress (LTS), etc. For more info, check the documentation of the function by calling `?r5r::accessibility` in your R Console or check the documentation on [{r5r} website](https://ipeagit.github.io/r5r/reference/accessibility.html).
 :::
 
 
 
-The output is a `data.frame`. Here's how the output looks like:
+The output is a `data.frame` and it looks like this.  It shows for every origin `id` the number of opportunities that can be reached 
 
 ```{r}
 head(access1)
 
 ```
 
-Now it is super simple to merge these accessibility estimates to our spatial grid to visualize these results on a map.    
+# 5. Accessibility map
+
+Now it is super simple to merge these accessibility estimates to our spatial grid to visualize these results on a map.
 
 ```{r}
 # merge spatial grid with accessibility estimates
@@ -134,7 +138,8 @@ access_sf <- left_join(grid, access1, by = c('h3_address'='id'))
 ggplot() +
   geom_sf(data = access_sf, aes(fill = accessibility), color= NA) +
   scale_fill_viridis_c(direction = -1, option = 'B') +
-  labs(fill = "Number of\nfacilities within\n20 minutes") +
+  labs(subtitle = 'Number of schools and hospitals accessible by transit in 20 minutes',
+       fill = 'Number of\nfacilities') +
   theme_minimal() +
   theme(axis.title = element_blank()) +
   facet_wrap(~opportunity) +
