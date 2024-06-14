@@ -1,1 +1,3 @@
-This website provides the supporting material for the Workshop **"A crash course on urban accessibility with R"**. The Workshop will be conducted during the [2024 WSTLUR](https://evento.uniandes.edu.co/en/wstlur-2024/Home/) (World Symposium on Transport and Land Use Research), which will be hosted by the Universidad de Los Andes, in Bogota, Colombia. The workshop is sponsored by the [World Society Transport and Land Use Research (WSTLUR)](https://www.wstlur.org/).
+Repository with the code to develop the website used in the Workshop **"A crash course on urban accessibility with R"**, conducted during the [2024 WSTLUR](https://evento.uniandes.edu.co/en/wstlur-2024/Home/).
+
+[Website](https://ipeagit.github.io/access_workshop_bogota_2024/).
