@@ -50,11 +50,17 @@ To visualize the spatial distribution of these data, we can retrieve the geometr
 
 ```{r}
 # retrieve polygons of H3 spatial grid
-grid <- h3jsr::cell_to_polygon(points$id, simple = FALSE)
+grid <- h3jsr::cell_to_polygon(
+  points$id,
+  simple = FALSE
+  )
 
 # merge spatial grid with land use data
-grid_poa <- left_join(grid, points,
-                      by = c('h3_address'='id'))
+grid_poa <- left_join(
+  grid,
+  points,
+  by = c('h3_address'='id')
+  )
 
 # interactive map
 mapview(grid_poa, zcol = 'population')
@@ -135,7 +141,11 @@ Now it is super simple to merge these accessibility estimates to our spatial gri
 
 ```{r}
 # merge spatial grid with accessibility estimates
-access_sf <- left_join(grid, access1, by = c('h3_address'='id'))
+access_sf <- left_join(
+  grid, 
+  access1, 
+  by = c('h3_address'='id')
+  )
 
 # plot
 ggplot() +

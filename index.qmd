@@ -21,11 +21,16 @@ The workshop will also illustrate how to calculate different measures of *inequa
 </div>
 
 
+::: {.callout-note appearance="simple"}
+`{r5r}` is an R package for rapid realistic routing on multimodal transport networks (walk, bike, public transport and car). It provides a simple and friendly interface to [R5, the Rapid Realistic Routing on Real-world and Reimagined networks](https://github.com/conveyal/r5), the routing engine developed independently by [Conveyal](https://conveyal.com/). Kudos to Conveyal for their amazing work.
+:::
+
+
 Here are a few introductory slides explaining we will cover and what we *do not* cover in this workshop:
 
 <p><embed src="slides/1_intro.pdf" style="width:100.0%;height:100vh;" /></p>
 
-::: {.callout-important appearance="simple"}
+::: {.callout-important appearance="default"}
 This workshop assumes the attendee has a basic knowledge of the R programming language. If you want to familiarize yourself with it, we recommend the books below:
 
 - [R for Data Science](https://r4ds.had.co.nz/)
@@ -33,7 +38,7 @@ This workshop assumes the attendee has a basic knowledge of the R programming la
 - [Data Science in R](https://livro.curso-r.com/) (in Portuguese)
 :::
 
-# Reading material:
+# Suggested Reading material:
 
 Extra reading material relevant (but not required) for the workshop.
 

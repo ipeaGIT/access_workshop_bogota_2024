@@ -263,13 +263,21 @@ access_nexp$metric <- 'grav_exponential'
 df <- rbind(access_cum_t,
             access_cum_i,
             access_lgst,
-            access_nexp)
+            access_nexp
+            )
 
 # retrieve polygons of H3 spatial grid
-grid <- h3jsr::cell_to_polygon(points$id, simple = FALSE)
+grid <- h3jsr::cell_to_polygon(
+  points$id, 
+  simple = FALSE
+  )
 
 # merge accessibility estimates
-access_sf <- left_join(grid, df, by = c('h3_address'='id'))
+access_sf <- left_join(
+  grid, 
+  df, 
+  by = c('h3_address'='id')
+  )
 
 ```
 

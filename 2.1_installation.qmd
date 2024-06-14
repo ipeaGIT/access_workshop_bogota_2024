@@ -4,6 +4,7 @@ title: "Installation"
 
 ::: {.callout-important appearance="simple"}
 To follow the workshop, you should have the following programs installed on your machine ***before*** the day of the workshop.
+
 - R and RStudio
 - A few R packages
 - Java JDK 21
@@ -22,14 +23,15 @@ We assume you already have R and RStudio installed in your machine. In case you 
 The workshop uses a few R packages that need to be installed in your machine. The simplest way to do this is running the code below. This might take a few minutes if this is the first time you install these packages.
 
 ```{R eval = FALSE, message = FALSE}
-pkgs_to_install <- c('r5r',
-                     'accessibility',
-                     'ggplot2',
-                     'mapview',
-                     'dplyr',
-                     'h3jsr',
-                     'sf'
-                     )
+pkgs_to_install <- c(
+  'r5r',
+  'accessibility',
+  'ggplot2',
+  'mapview',
+  'dplyr',
+  'h3jsr',
+  'sf'
+  )
 
 install.packages(pkgs_to_install)
 ```
@@ -54,9 +56,13 @@ To use the `{r5r}` package (version v2.0 or higher), you will need to have *Java
 # install dev version of {rJavaEnv}
 remotes::install_github("e-kotov/rJavaEnv")
 
+# check version of JDK currently installed (if any) 
+rJavaEnv::java_check_version_rjava()
+
 # install JDK 21
-rJavaEnv::java_quick_install(version = 21,
-                             distribution = 'Corretto')
+rJavaEnv::java_quick_install(
+  version = 21,
+  distribution = 'Corretto')
 ```
 
 Alternatively, you can manually download and install any of these options:
