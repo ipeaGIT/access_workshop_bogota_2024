@@ -2,11 +2,6 @@
 title: "Installation"
 ---
 
-A few slides explaining the computational requirements to conduct transport routing and accessibility analysis with `R` in general:
-
-<p><embed src="slides/2_computational_requirements.pdf" style="width:100.0%;height:100vh;" /></p>
-
-
 ::: {.callout-important appearance="simple"}
 To follow the workshop, you should have the following programs installed on your machine ***before*** the day of the workshop.
 - R and RStudio
@@ -69,3 +64,8 @@ Alternatively, you can manually download and install any of these options:
 - [Adoptium/Eclipse Temurin](https://adoptium.net/)
 - [Amazon Corretto](https://aws.amazon.com/corretto/)
 - [Oracle OpenJDK](https://jdk.java.net/21/)
+
+
+Accompanying slides explaining the computational requirements to conduct transport routing and accessibility analysis with `R`.
+
+<p><embed src="slides/2_computational_requirements.pdf" style="width:100.0%;height:100vh;" /></p>

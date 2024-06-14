@@ -13,13 +13,13 @@ In this section, we'll learn how to calculate a travel time matrix and how to us
 </div>
 
 
-This flexible  approach to calculate accessibility only involves 3 steps.
+This flexible approach to calculate accessibility only involves 3 steps:
 
-1. Building a routable transport network
+1. Build a routable transport network
 2. Calculate a travel time matrix
 3. Calculate accessibility
 
-Now let's start by loading load the packages we need:
+Now let's start loading the packages we need:
 
 ```{r, message=FALSE}
 # allocating memory to java
@@ -42,7 +42,7 @@ First, we build the multimodal transport network by passing the path of our data
 # path to data directory
 data_path <- system.file("extdata/poa", package = "r5r")
 
-# build network  
+# build network
 r5r_core <- r5r::setup_r5(data_path, 
                           verbose = FALSE)
 
