@@ -11,7 +11,7 @@ This website provides the supporting material for the Workshop **"A crash course
 
 Routing and accessibility analyses are increasingly used in urban and transport research and planning. In this workshop, you will learn how to estimate travel time matrices and perform accessibility analyzes in multimodal transport networks using the [{r5r}](https://ipeagit.github.io/r5r/) and [{accessibility}](https://ipeagit.github.io/accessibility/) packages in the `R` programming language.
 
-The workshop will also illustrate how to calculate different measures of *inequality* of access to opportunities and accessibility *poverty*, which are crucial to assess the accessibility impacts of transportation projects from a transportation equity perspective. The course is based on the book [“Introduction to urban accessibility: a practical guide with R”](https://ipeagit.github.io/intro_access_book/).
+The workshop will also illustrate how to calculate different measures of *inequality* of access to opportunities and accessibility *poverty*, which are crucial to assess the accessibility impacts of transportation projects from a transportation equity perspective. The course is based on the book [“Introduction to urban accessibility: a practical guide with R”](https://ipeagit.github.io/intro_access_book/) [@pereira2023introduction].
 
 <!-- package logos side by side  -->
 <div style="text-align: center">
@@ -31,18 +31,18 @@ Here are a few introductory slides explaining what we cover and what we *do not*
 <p><embed src="slides/1_intro.pdf" style="width:100.0%;height:100vh;" /></p>
 
 ::: {.callout-important appearance="default"}
-This workshop assumes the attendee has a basic knowledge of the R programming language. If you want to familiarize yourself with it, we recommend the books below:
+This workshop assumes the attendee has a basic knowledge of the R programming language. If you want to familiarize yourself with R, we recommend the books below:
 
 - [R for Data Science](https://r4ds.had.co.nz/)
 - [Geocomputation with R](https://geocompr.robinlovelace.net/)
 - [Data Science in R](https://livro.curso-r.com/) (in Portuguese)
 :::
 
-# Suggested Reading material:
+# Recommended reading:
 
 Extra reading material relevant (but not required) for the workshop.
 
-- Online book [“Introduction to urban accessibility a practical guide with R”](https://ipeagit.github.io/intro_access_book/) (Chapters 3 and 6).
+- Online book [“Introduction to urban accessibility a practical guide with R”](https://ipeagit.github.io/intro_access_book/) [@pereira2023introduction] - Chapters 3 and 6.
 - The `{accessibility}` package  [website and documentation](https://ipeagit.github.io/accessibility/ ).
 - The `{r5r}` package [website and documentation](https://ipeagit.github.io/r5r/).
 - Paper of the `{r5r}` package, by @pereira2021r5r.

@@ -4,13 +4,13 @@ title: "Data requirements"
 
 In order to conduct transport routing and accessibility analysis using the `{r5r}` package, you will need a few input data sets:
 
-- A road network from OpenStreetMap (OSM) in `.pbf `format (*mandatory*).
+- A road network from OpenStreetMap (OSM) in `.pbf` format (*mandatory*).
 - A public transport feed in` GTFS.zip` format (optional).
 - A raster file with Digital Elevation Model data in `.tif` format (optional).
 - Some data on the spatial distribution of population and/or activities such as employment, schools, health care facilities.
 
 
-All the data we'll use in this workshop is provided with the code exercises. However, here is  where you can download these data sets for other places. See also slides below.
+The data sets we'll use in this workshop are provided with the code exercises. If you would like to find similar data for you other regions in the world, here are a few data sources. See also slides below.
 
 - **Street network** (mandatory):
   - [{osmextract}](https://docs.ropensci.org/osmextract/), R package;

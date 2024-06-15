@@ -1,11 +1,12 @@
 ---
 title: "Flexible approach"
 code-annotations: hover
+from: markdown+emoji
 ---
 
-In the the previous section, we learned a 'quick approach' to calculate accessibility directly from within `{r5r}`. The shortcoming of this approach it that is limited to only a few predefined accessibility metrics available in `{r5r}`. Oftentimes, we want to analyze other types of accessibility metrics and/or to have more control of the different steps of the analysis.
+In the the previous section, we learned a 'quick approach' to calculate accessibility directly from within `{r5r}`. A shortcoming of this approach is that it is limited to only a few predefined accessibility metrics available in `{r5r}`. Oftentimes, we want to analyze other types of accessibility metrics and/or to have more control of the different steps of the analysis.
 
-**In this section, we'll learn how to calculate a travel time matrix and how to use it to compute different types of accessibility metrics.** This is a more 'flexible' approach that combines the capabilities of the `{r5r}` and the `{accessibility}` packages. We'll use again the sample data for the city of Porto Alegre (Brazil) that comes with the `{r5r}` package.
+**In this section, we'll learn how to calculate travel time matrices and to use them to compute different types of accessibility metrics.** This is a more 'flexible' approach that combines the capabilities of the `{r5r}` and the `{accessibility}` packages. We'll use again the sample data for the city of Porto Alegre, Brazil, that comes with the `{r5r}` package.
 
 <!-- package logos side by side  -->
 <div style="text-align: center">
@@ -15,9 +16,9 @@ In the the previous section, we learned a 'quick approach' to calculate accessib
 
 This flexible approach to calculate accessibility only involves 3 steps:
 
-1. Build a routable transport network
-2. Calculate a travel time matrix
-3. Calculate accessibility
+1. Building a routable transport network
+2. Computing a travel time matrix
+3. Calculating accessibility
 
 Now let's start loading the packages we need:
 
@@ -48,7 +49,7 @@ r5r_core <- r5r::setup_r5(data_path,
 
 ```
 
-# 2. Calculate a travel time matrix
+# 2. Computing a travel time matrix
 
 The second step is to calculate a travel time matrix with door-to-door travel time estimates from all origins to all destinations. To do this, we use the `r5r::travel_time_matrix()` function.
 
@@ -80,7 +81,7 @@ ttm <- r5r::travel_time_matrix(
 
 ::: {.callout-tip}
 ## Tip
-Note that the `r5r::travel_time_matrix()` includes several additional parameters, which allows you to specify some trip characteristics, such as maximum walking time, a departure time window, the maximum number of public transport legs allowed, etc. For more info, check the documentation of the function by calling `?r5r::travel_time_matrix` in your R Console or check the documentation on [{r5r} website](https://ipeagit.github.io/r5r/reference/travel_time_matrix.html).
+Note that the `r5r::travel_time_matrix()` includes several additional parameters that allow you to specify some trip characteristics, such as maximum walking time, a departure time window, the maximum number of public transport legs allowed, etc. For more info, check the documentation of the function by calling `?r5r::travel_time_matrix` in your R Console or check the documentation on [{r5r} website](https://ipeagit.github.io/r5r/reference/travel_time_matrix.html).
 :::
 
 The output is a `data.frame`, which looks like this. It is a matrix in long format with the columns `from_id`, `to_id` and a third column indicating the travel time (in minutes) for each origin-destination pair.
@@ -94,11 +95,11 @@ head(ttm)
 ::: {.callout-note appearance="simple"}
 ## Processing speed
 
-The `travel_time_matrix()` function uses an extension of the RAPTOR routing algorithm [@conway2017evidencebased], making R5 extremely fast. Depending on the number of origin-destination pairs, `{r5r}` can calculate travel time matrices between 6 and 200 times faster than other multimodal routing softwares [@higgins2022calculating].
+The `travel_time_matrix()` function uses an extension of the RAPTOR routing algorithm [@conway2017evidencebased], making R5 extremely fast. Depending on the number of origin-destination pairs, `{r5r}` can calculate travel time matrices between 6 and 200 times faster than other multimodal routing engines [@higgins2022calculating].
 :::
 
 
-# 3. Calculate accessibility 
+# 3. Calculating accessibility 
 
 <img align="right" src="/images/accessibility_logo.png" alt="logo" width="140"> 
 
@@ -130,7 +131,7 @@ Now let's calculate a few accessibility indicators.
 
 ### Threshold-based cumulative accessibility
 
-To calculate a traditional cumulative accessibility measure, we can use the `accessibility::cumulative_cutoff()` function. Along with the travel matrix and land use datasets, we only need to pass the name of the column with the travel time values, the name of the column with the count of opportunities, and a travel time cutoff. 
+To calculate a traditional cumulative accessibility measure, we can use the `accessibility::cumulative_cutoff()` function. Along with the travel matrix and land use data sets, we only need to pass the name of the column with the travel time values, the name of the column with the count of opportunities, and a travel time cutoff. 
 
 Here, we calculate the number of schools accessible in 20 minutes.
 
@@ -162,7 +163,7 @@ access_cum_i <- accessibility::cumulative_interval(
   land_use_data = points,
   travel_cost = 'travel_time_p50',
   opportunity = 'schools',
-  interval = c(20,30),
+  interval = c(15,25),
   summary_function = mean
   )
   
@@ -288,7 +289,7 @@ Plot map
 ggplot() +
   geom_sf(data = access_sf, aes(fill = schools), color= NA) +
   scale_fill_viridis_c(direction = -1, option = 'B') +
-  labs(fill = "Access\nscore") +
+  labs(title = "Access to schools by public transport using different accessibility metrics", fill = "Access\nscore") +
   theme_minimal() +
   theme(axis.title = element_blank()) +
   facet_wrap(~metric) +

@@ -1,19 +1,19 @@
 ---
 title: "Equity measures"
+from: markdown+emoji
 ---
 
-A central question in transportation research and practice involves assessing how the accessibility benefits of transportation systems and projects are distributed across different socioeconomic and demographic groups. Transportation equity concerns in research and practice are fundamentally related to two types of issues: (1) accessibility inequality and (2) accessibility poverty. **In this section you will learn how to use the `{accessibility}` package to calculate different indicators of accessibility inequality and poverty.**
+A central question in transportation research and practice involves assessing how the accessibility benefits of transportation systems and projects are distributed across different socioeconomic and demographic groups. Transportation equity concerns are fundamentally related to two types of issues: (1) accessibility inequality and (2) accessibility poverty. **In this section you will learn how to use the `{accessibility}` package to calculate different indicators of accessibility inequality and poverty.**
 <img align="right" src="/images/accessibility_logo.png?raw=true" alt="logo" width="140">
 
-In a recent paper, we discussed the advantages and disadvantages of various inequality and poverty metrics most commonly used in the transport literature [@karner2024advances] [^1]. The slides below give a *very* short summary of some ideas discussed in the paper. Just enough to follow this workshop section. Nonetheless, I would strongly recommend reading the whole paper.
+In a recent paper, we discussed the advantages and disadvantages of various inequality and poverty metrics most commonly used in the transport literature [@karner2024advances] - ungated PDF [here](https://www.urbandemographics.org/publication/2024_transp_measuring_transportation_equity/). The slides below give a *very* short summary of some ideas discussed in the paper. Just enough to follow this workshop section. Nonetheless, I would strongly recommend reading the whole paper.
 
-[^1]: Ungated PDF [here](https://www.urbandemographics.org/publication/2024_transp_measuring_transportation_equity/).
  
 <!-- Slides -->
 <p><embed src="slides/3.3_equity_metrics.pdf" style="width:100.0%;height:100vh;" /></p>
 
 
-In this section, we'll be using a couple sample data sets for the city of Belo Horizonte (Brazil), which come with the `{accessibility}` package. In the code chunk below, we read the travel time matrix and land use data and calculate the average number of jobs accessible between 30 and 60 minutes by public transport.
+In this section, we'll be using a couple sample data sets for the city of Belo Horizonte (Brazil), which come with the `{accessibility}` package. In the code chunk below, we read the travel time matrix and land use data, and calculate the average number of jobs accessible in 30 by public transport.
 
 ```{r, message=FALSE}
 library(accessibility)
@@ -27,19 +27,19 @@ data_dir <- system.file("extdata", package = "accessibility")
 ttm <- readRDS(file.path(data_dir, "travel_matrix.rds"))
 lud <- readRDS(file.path(data_dir, "land_use_data.rds"))
 
-# calculate time interval cumulative access
+# calculate threshold-based cumulative access
 access_df <- cumulative_cutoff(
   travel_matrix = ttm,
   land_use_data = lud,
   opportunity = "jobs",
   travel_cost = "travel_time",
   cutoff = 30
-  #interval = c(30,60)
   )
 
 head(access_df)
 ```
-Time for a quick visual inspection! We can merge our accessibility results with the land use/population data, and visualize how employment accessibility is distributed across different income groups.
+
+:mag_right: Time for a quick visual inspection! We can merge our accessibility results with the land use/population data, and visualize how employment accessibility is distributed across different income groups.
 
 ```{r}
 # merge acces and land use data
@@ -58,7 +58,7 @@ ggplot(data = df) +
                    weight = population, 
                    color = income_decile)) +
   scale_colour_brewer(palette = 'RdBu') + 
-  labs(subtitle = 'Number of jobs accessible between 30 and 60 minutes by public transport',
+  labs(subtitle = 'Number of jobs accessible in 30 minutes by public transport',
        x = 'Income decile', y = 'Jobs (in thousands)') +
   scale_x_discrete(labels = c("D1\npoorest", 
                               paste0("D", 2:9), 
@@ -66,7 +66,7 @@ ggplot(data = df) +
   theme_minimal()
 ```
 
-The box plot shows a very uneven distribution of access to job opportunities. Now let's what we can learn about accessibility inequality and poverty in this regions with a few examples.
+The box plot shows a very uneven distribution of access to job opportunities. Now let's check what we can learn about accessibility inequality and poverty in this region with a few examples.
 
 ::: {.callout-tip appearance="simple"}
 A detailed explanation of all inequality and poverty measures covered in `{accessibility}` are available in the [package documentation](https://ipeagit.github.io/accessibility/articles/inequality_and_poverty.html).
@@ -93,7 +93,7 @@ palma
 ```
 ## Concentration index
 
-The concentration index (CI) estimates the extent to which accessibility inequalities are systematically associated with individuals’ socioeconomic levels. CI values can theoretically vary between -1 and 1 (when all accessibility is concentrated in the most or in the least disadvantaged cell, respectively). Negative values indicate that inequalities favor the poor, while positive values indicate a pro-rich bias.
+The concentration index (CI) estimates the extent to which accessibility inequalities are systematically associated with individuals’ socioeconomic levels. CI values can theoretically vary between -1 and 1 (when all accessibility is concentrated in the most or in the least disadvantaged person, respectively). Negative values indicate that inequalities favor the poor, while positive values indicate a pro-rich bias.
 
 ```{r}
 ci <- accessibility::concentration_index(
@@ -115,7 +115,7 @@ You probably shouldn't use the Gini index to measure accessibility inequality [s
 
 ## Foster-Greer-Thorbecke (FGT) poverty measures 
 
-The `fgt_poverty()` function calculates the FGT metrics, a family of poverty measures originally proposed by @foster1984class that can be used to capture the extent and severity of poverty within an accessibility distribution. The FGT family is composed of three measures:
+The `fgt_poverty()` function calculates the FGT metrics, a family of poverty measures originally proposed by @foster1984class, and which that can be used to capture the extent and severity of poverty within an accessibility distribution. The FGT family is composed of three measures:
 
 - FGT0: it captures the extent of poverty as a simple headcount - i.e. the proportion of people below the poverty line;
 - FGT1: also know as the "poverty gap index", it captures the severity of poverty as the average percentage distance between the poverty line and the accessibility of individuals below the poverty line;
@@ -126,7 +126,7 @@ the poverty line below which individuals are considered to be in accessibility
 poverty. For the sake of this exercise, we'll consider the lowest 25th percentile of access as our poverty line, which in this example is approximately 23 thousand jobs.
 
 ::: {.callout-important appearance="simple"}
-Quick reminder that the definition of an accessibility poverty line is ultimately a moral and political decision [@pereira2017distributive; @lucas2019measuring].
+Quick reminder that the definition of an accessibility poverty line is ultimately a moral and political decision and not simply an empirical or technical question [@pereira2017distributive; @lucas2019measuring].
 :::
 
 ```{r}

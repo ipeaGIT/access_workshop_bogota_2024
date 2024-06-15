@@ -1,15 +1,16 @@
 ---
 title: "Quick approach"
 code-annotations: hover
+from: markdown+emoji
 ---
 
 <img align="right" src="/images/r5r_logo.png?raw=true" alt="logo" width="140"> 
-**In this first hands-on section of the workshop, we'll learn a very quick and simple way to calculate spatial accessibility using the `{r5r}` package**. In the next section, we'll see a more flexible and robust way to do the same thing. Here we'll be calculating the number of schools accessible by public transport within a travel time of up to 20 minutes.
+**In this first hands-on section of the workshop, we'll learn a very quick and simple way to calculate spatial accessibility using the `{r5r}` package**. In the next section, we'll see a more flexible and robust way to do the same thing. Here we'll be calculating the number of schools accessible by public transport within a travel time of 20 minutes.
 
 
 ### 1. Allocating memory to Java & loading packages
 
-First, let's increase the memory available to run Java, which is used by the underlying R5 routing engine. By default, `R` allocates only 512 MB of memory to Java processes. To increase the available memory to 2 GB, for example, we use the following command. Note that this needs to be run ***before*** loading the packages that will be used in our analysis.
+First, let's increase the memory available to run Java, which is used by the underlying R5 routing engine. To increase the available memory to 2 GB, for example, we use the following command. Note that this needs to be run ***before*** loading the packages that will be used in our analysis.
 
 ```{r}
 options(java.parameters = "-Xmx2G")
@@ -26,14 +27,14 @@ library(ggplot2)
 ```
 
 
-# 2. Quick pick in our sample data
+# 2. A quick look at our sample data
 
-The case study we'll the city of Porto Alegre (Brazil). The `{r5r}` package brings a small sample data for this city, including the following files:
+Our case study is the city of Porto Alegre, Brazil. The `{r5r}` package brings a small sample data for this city, including the following files:
 
-* An OpenStreetMap network: `poa_osm.pbf`
-* Two public transport GTFS feeds: `poa_eptc.zip` (buses) and `poa_trensurb.zip` (trains)
-* A raster elevation data: `poa_elevation.tif`
-* A data frame with land use data: `poa_hexgrid.csv` file with the centroids of a regular hexagonal grid covering the sample area. The data frame also indicates the number of residents and schools in each cell. We'll use these points as origins and destinations in our analysis.
+- An OpenStreetMap network: `poa_osm.pbf`
+- Two public transport GTFS feeds: `poa_eptc.zip` (buses) and `poa_trensurb.zip` (trains)
+- A raster elevation data: `poa_elevation.tif`
+- A data frame with land use data: `poa_hexgrid.csv` file with the centroids of a regular hexagonal grid covering the sample area. The data frame also indicates the number of residents and schools in each cell. We'll use these points as origins and destinations in our analysis.
 
 These data sets should be saved in a single directory (our `data_path`). Here's how the land use data looks like:
 
@@ -46,7 +47,7 @@ points <- read.csv(file.path(data_path, "poa_hexgrid.csv"))
 head(points)
 ```
 
-To visualize the spatial distribution of these data, we can retrieve the geometry of the H3 hexagonal grid explore it using an interactive map:
+:mag_right: To visualize the spatial distribution of these data, we can retrieve the geometry of the H3 hexagonal grid and explore it using an interactive map:
 
 ```{r}
 # retrieve polygons of H3 spatial grid
@@ -69,26 +70,28 @@ mapview(grid_poa, zcol = 'population')
 
 
 
-# 3. Building routable transport network
+# 3. Building a routable transport network
 
-This quick approach to calculate accessibility only involves 2 steps. The first step is to build the multimodal transport network using the `r5r::setup_r5()` function.
+This quick approach to calculate accessibility involves only 2 steps. The first step is to build the multimodal transport network using the `r5r::setup_r5()` function.
 
 
 ```{r, message=FALSE}
 r5r_core <- r5r::setup_r5(data_path, 
                           verbose = FALSE)
 ```
-As you can see, we only need to pass the path to our data directory to the `r5r::setup_r5()` function. The function then combines all the data saved in this directory to create a graph that is used for routing trips between origin-destination pairs and, consequently, for calculating travel time matrices and accessibility.
+
+As you can see, we only need to pass the path to our data directory to the `r5r::setup_r5()` function. The function then combines the OSM, GTFS and elevation data in this directory to create a graph that is used for routing trips between origin-destination pairs and, consequently, for calculating travel time matrices and accessibility.
 
 
 
-# 4. Calculate access: quick and easy 
+# 4. Calculating access: quick approach 
 
-In the second step, you can calculate accessibility estimates in a single call using the `r5r::accessibility()` function. It includes different options of decay functions to calculate cumulative accessibility measures and different gravity-based metrics.
+In the second step, you can calculate accessibility estimates in a single call using the `r5r::accessibility()` function. It includes different options of decay functions to compute cumulative accessibility measures and different gravity-based metrics.
 
 In this example, we calculate the cumulative accessibility of the number of schools and hospitals accessible in less than 20 minutes by public transport. Thus, we'll be using `decay_function = "step"`.
 
-Note that to use the `r5r::accessibility()`, the input of `points` must be a `data.frame` with columns indicating: 
+Note that to use `r5r::accessibility()`, the input of `points` must be a `data.frame` with columns indicating:
+
 - the `id` of each location
 - spatial coordinates `lat` and `lon`
 - the number of activities in each location. The name of this column has to be passed to the `opportunities_colnames` parameter.
@@ -118,17 +121,15 @@ access1 <- r5r::accessibility(
 
 ```
 1. In minutes
-2. Note you can pass the column of more than one type of opportunity.
+2. Note you can pass the columns of more than one type of opportunity.
 3. Similarly, you could pass more than one time threshold.
 
 ::: {.callout-tip}
 ## Tip
-Note that the `r5r::accessibility()` function has several additional parameters. These allow you to specify different characteristics of trips, including a maximum trip duration, walking and cycling speed, level of traffic stress (LTS), etc. For more info, check the documentation of the function by calling `?r5r::accessibility` in your R Console or check the documentation on [{r5r} website](https://ipeagit.github.io/r5r/reference/accessibility.html).
+Note that the `r5r::accessibility()` function has several additional parameters that allow you to specify different characteristics of trips, including a maximum trip duration, walking and cycling speed, level of traffic stress (LTS), etc. For more info, check the documentation of the function by calling `?r5r::accessibility` in your R Console or check the documentation on [{r5r} website](https://ipeagit.github.io/r5r/reference/accessibility.html).
 :::
 
-
-
-The output is a `data.frame` and it looks like this.  It shows for every origin `id` the number of opportunities that can be reached:
+The output is a `data.frame` that shows for every origin `id` the number of opportunities that can be reached:
 
 ```{r}
 head(access1)
@@ -151,7 +152,7 @@ access_sf <- left_join(
 ggplot() +
   geom_sf(data = access_sf, aes(fill = accessibility), color= NA) +
   scale_fill_viridis_c(direction = -1, option = 'B') +
-  labs(subtitle = 'Number of schools and hospitals accessible by transit in 20 minutes',
+  labs(title = 'Number of schools and hospitals accessible by public transport in 20 minutes',
        fill = 'Number of\nfacilities') +
   theme_minimal() +
   theme(axis.title = element_blank()) +

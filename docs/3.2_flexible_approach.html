@@ -234,8 +234,8 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
   <ul>
   <li><a href="#building-a-routable-transport-network" id="toc-building-a-routable-transport-network" class="nav-link active" data-scroll-target="#building-a-routable-transport-network">1. Building a routable transport network</a></li>
-  <li><a href="#calculate-a-travel-time-matrix" id="toc-calculate-a-travel-time-matrix" class="nav-link" data-scroll-target="#calculate-a-travel-time-matrix">2. Calculate a travel time matrix</a></li>
-  <li><a href="#calculate-accessibility" id="toc-calculate-accessibility" class="nav-link" data-scroll-target="#calculate-accessibility">3. Calculate accessibility</a>
+  <li><a href="#computing-a-travel-time-matrix" id="toc-computing-a-travel-time-matrix" class="nav-link" data-scroll-target="#computing-a-travel-time-matrix">2. Computing a travel time matrix</a></li>
+  <li><a href="#calculating-accessibility" id="toc-calculating-accessibility" class="nav-link" data-scroll-target="#calculating-accessibility">3. Calculating accessibility</a>
   <ul class="collapse">
   <li><a href="#cumulative-accessibility-measure" id="toc-cumulative-accessibility-measure" class="nav-link" data-scroll-target="#cumulative-accessibility-measure">3.1 Cumulative accessibility measure</a>
   <ul class="collapse">
@@ -270,8 +270,8 @@ div.csl-indent {
 </div>
       <div class="about-contents"><main class="content" id="quarto-document-content">
 
-<p>In the the previous section, we learned a ‘quick approach’ to calculate accessibility directly from within <code>{r5r}</code>. The shortcoming of this approach it that is limited to only a few predefined accessibility metrics available in <code>{r5r}</code>. Oftentimes, we want to analyze other types of accessibility metrics and/or to have more control of the different steps of the analysis.</p>
-<p><strong>In this section, we’ll learn how to calculate a travel time matrix and how to use it to compute different types of accessibility metrics.</strong> This is a more ‘flexible’ approach that combines the capabilities of the <code>{r5r}</code> and the <code>{accessibility}</code> packages. We’ll use again the sample data for the city of Porto Alegre (Brazil) that comes with the <code>{r5r}</code> package.</p>
+<p>In the the previous section, we learned a ‘quick approach’ to calculate accessibility directly from within <code>{r5r}</code>. A shortcoming of this approach is that it is limited to only a few predefined accessibility metrics available in <code>{r5r}</code>. Oftentimes, we want to analyze other types of accessibility metrics and/or to have more control of the different steps of the analysis.</p>
+<p><strong>In this section, we’ll learn how to calculate travel time matrices and to use them to compute different types of accessibility metrics.</strong> This is a more ‘flexible’ approach that combines the capabilities of the <code>{r5r}</code> and the <code>{accessibility}</code> packages. We’ll use again the sample data for the city of Porto Alegre, Brazil, that comes with the <code>{r5r}</code> package.</p>
 <!-- package logos side by side  -->
 <div style="text-align: center">
 <table>
@@ -287,9 +287,9 @@ div.csl-indent {
 </div>
 <p>This flexible approach to calculate accessibility only involves 3 steps:</p>
 <ol type="1">
-<li>Build a routable transport network</li>
-<li>Calculate a travel time matrix</li>
-<li>Calculate accessibility</li>
+<li>Building a routable transport network</li>
+<li>Computing a travel time matrix</li>
+<li>Calculating accessibility</li>
 </ol>
 <p>Now let’s start loading the packages we need:</p>
 <div class="cell">
@@ -315,8 +315,8 @@ div.csl-indent {
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="calculate-a-travel-time-matrix" class="level1">
-<h1>2. Calculate a travel time matrix</h1>
+<section id="computing-a-travel-time-matrix" class="level1">
+<h1>2. Computing a travel time matrix</h1>
 <p>The second step is to calculate a travel time matrix with door-to-door travel time estimates from all origins to all destinations. To do this, we use the <code>r5r::travel_time_matrix()</code> function.</p>
 <p>As basic inputs, this function receives the routable network created above, origin and destination points as <code>data.frames</code> with columns <code>id</code>, <code>lon</code> and <code>lat</code>, the transportation mode and the departure time.</p>
 <div class="cell">
@@ -358,7 +358,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Note that the <code>r5r::travel_time_matrix()</code> includes several additional parameters, which allows you to specify some trip characteristics, such as maximum walking time, a departure time window, the maximum number of public transport legs allowed, etc. For more info, check the documentation of the function by calling <code>?r5r::travel_time_matrix</code> in your R Console or check the documentation on <a href="https://ipeagit.github.io/r5r/reference/travel_time_matrix.html">{r5r} website</a>.</p>
+<p>Note that the <code>r5r::travel_time_matrix()</code> includes several additional parameters that allow you to specify some trip characteristics, such as maximum walking time, a departure time window, the maximum number of public transport legs allowed, etc. For more info, check the documentation of the function by calling <code>?r5r::travel_time_matrix</code> in your R Console or check the documentation on <a href="https://ipeagit.github.io/r5r/reference/travel_time_matrix.html">{r5r} website</a>.</p>
 </div>
 </div>
 <p>The output is a <code>data.frame</code>, which looks like this. It is a matrix in long format with the columns <code>from_id</code>, <code>to_id</code> and a third column indicating the travel time (in minutes) for each origin-destination pair.</p>
@@ -385,12 +385,12 @@ Processing speed
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The <code>travel_time_matrix()</code> function uses an extension of the RAPTOR routing algorithm <span class="citation" data-cites="conway2017evidencebased">(<a href="#ref-conway2017evidencebased" role="doc-biblioref">Conway, Byrd, and van der Linden 2017</a>)</span>, making R5 extremely fast. Depending on the number of origin-destination pairs, <code>{r5r}</code> can calculate travel time matrices between 6 and 200 times faster than other multimodal routing softwares <span class="citation" data-cites="higgins2022calculating">(<a href="#ref-higgins2022calculating" role="doc-biblioref">Higgins et al. 2022</a>)</span>.</p>
+<p>The <code>travel_time_matrix()</code> function uses an extension of the RAPTOR routing algorithm <span class="citation" data-cites="conway2017evidencebased">(<a href="#ref-conway2017evidencebased" role="doc-biblioref"><strong>conway2017evidencebased?</strong></a>)</span>, making R5 extremely fast. Depending on the number of origin-destination pairs, <code>{r5r}</code> can calculate travel time matrices between 6 and 200 times faster than other multimodal routing engines <span class="citation" data-cites="higgins2022calculating">(<a href="#ref-higgins2022calculating" role="doc-biblioref">Higgins et al. 2022</a>)</span>.</p>
 </div>
 </div>
 </section>
-<section id="calculate-accessibility" class="level1">
-<h1>3. Calculate accessibility</h1>
+<section id="calculating-accessibility" class="level1">
+<h1>3. Calculating accessibility</h1>
 <p><img align="right" src="./images/accessibility_logo.png" alt="logo" width="140"></p>
 <p>Having computed a travel time matrix, we can combine it with land use data to calculate accessibility. For this, we will use the <code>{accessibility}</code> package, which provides some fast and convenient functions to calculate several accessibility measures.</p>
 <p>The package currently includes more than 7 different types of accessibility measures (see details in the package <a href="https://ipeagit.github.io/accessibility/reference/cost_to_closest.html">documentation website</a>).</p>
@@ -430,7 +430,7 @@ Processing speed
 <h2 data-anchor-id="cumulative-accessibility-measure">3.1 Cumulative accessibility measure</h2>
 <section id="threshold-based-cumulative-accessibility" class="level3">
 <h3 data-anchor-id="threshold-based-cumulative-accessibility">Threshold-based cumulative accessibility</h3>
-<p>To calculate a traditional cumulative accessibility measure, we can use the <code>accessibility::cumulative_cutoff()</code> function. Along with the travel matrix and land use datasets, we only need to pass the name of the column with the travel time values, the name of the column with the count of opportunities, and a travel time cutoff.</p>
+<p>To calculate a traditional cumulative accessibility measure, we can use the <code>accessibility::cumulative_cutoff()</code> function. Along with the travel matrix and land use data sets, we only need to pass the name of the column with the travel time values, the name of the column with the count of opportunities, and a travel time cutoff.</p>
 <p>Here, we calculate the number of schools accessible in 20 minutes.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># threshold-based cumulative accessibility</span></span>
@@ -467,7 +467,7 @@ Processing speed
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">land_use_data =</span> points,</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_cost =</span> <span class="st">'travel_time_p50'</span>,</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunity =</span> <span class="st">'schools'</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">30</span>),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">25</span>),</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">summary_function =</span> mean</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -475,12 +475,12 @@ Processing speed
 <div class="cell-output cell-output-stdout">
 <pre><code>                id schools
             &lt;char&gt;   &lt;int&gt;
-1: 89a901291abffff      10
-2: 89a9012a3cfffff       0
-3: 89a901295b7ffff       9
-4: 89a901284a3ffff       1
-5: 89a9012809bffff      15
-6: 89a901285cfffff      55</code></pre>
+1: 89a9012124fffff       1
+2: 89a9012126bffff       4
+3: 89a9012127bffff       4
+4: 89a90128003ffff       7
+5: 89a90128007ffff       7
+6: 89a9012800bffff       9</code></pre>
 </div>
 </div>
 <!-- 
@@ -596,7 +596,7 @@ By default, most functions of `{accessibility}` calculate *active* accessibility
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> access_sf, <span class="fu">aes</span>(<span class="at">fill =</span> schools), <span class="at">color=</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">option =</span> <span class="st">'B'</span>) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Access</span><span class="sc">\n</span><span class="st">score"</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Access to schools by public transport using different accessibility metrics"</span>, <span class="at">fill =</span> <span class="st">"Access</span><span class="sc">\n</span><span class="st">score"</span>) <span class="sc">+</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>metric) <span class="sc">+</span></span>
@@ -614,9 +614,6 @@ By default, most functions of `{accessibility}` calculate *active* accessibility
 
 </section>
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-conway2017evidencebased" class="csl-entry" role="listitem">
-Conway, Matthew Wigginton, Andrew Byrd, and Marco van der Linden. 2017. <span>“Evidence-<span>Based Transit</span> and <span>Land Use Sketch Planning Using Interactive Accessibility Methods</span> on <span>Combined Schedule</span> and <span>Headway-Based Networks</span>.”</span> <em>Transportation Research Record: Journal of the Transportation Research Board</em> 2653 (1): 45–53. <a href="https://doi.org/10.3141/2653-06">https://doi.org/10.3141/2653-06</a>.
-</div>
 <div id="ref-higgins2022calculating" class="csl-entry" role="listitem">
 Higgins, Christopher, Matthew Palm, Amber DeJohn, Luna Xi, James Vaughan, Steven Farber, Michael Widener, and Eric Miller. 2022. <span>“Calculating Place-Based Transit Accessibility: <span>Methods</span>, Tools and Algorithmic Dependence.”</span> <em>Journal of Transport and Land Use</em> 15 (1). <a href="https://doi.org/10.5198/jtlu.2022.2012">https://doi.org/10.5198/jtlu.2022.2012</a>.
 </div>

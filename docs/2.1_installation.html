@@ -259,13 +259,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="installing-r-and-rstudio" class="level1">
 <h1>Installing R and RStudio</h1>
-<p>We assume you already have R and RStudio installed in your machine. In case you don’t, <a href="https://posit.co/download/rstudio-desktop/#download">follow these simple instructions here</a>.</p>
+<p>We assume you already have R and RStudio installed on your machine. In case you don’t, <a href="https://posit.co/download/rstudio-desktop/#download">follow these simple instructions here</a>.</p>
 </section>
 <section id="installing-r-packages" class="level1">
 <h1>Installing R packages</h1>
-<p>The workshop uses a few R packages that need to be installed in your machine. The simplest way to do this is running the code below. This might take a few minutes if this is the first time you install these packages.</p>
+<p>The workshop uses a few R packages that need to be installed on your machine. The simplest way to do this is running the code below. This might take a few minutes if this is the first time you install these packages.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pkgs_to_install <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pkgs <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'r5r'</span>,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'accessibility'</span>,</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'ggplot2'</span>,</span>
@@ -275,9 +275,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'sf'</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(pkgs_to_install)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(pkgs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The safest way to replicate the code of this workshop, though, is cloning its <a href="https://github.com/ipeaGIT/access_workshop_WSTLUR_2024">repository</a> locally. This is because this repository uses the <code>{renv}</code> R package to manage the workshop dependencies, which is important to make sure we are using the intended versions of the packages dependencies.</p>
+<p>The safest way to replicate the code of this workshop, though, is cloning its <a href="https://github.com/ipeaGIT/access_workshop_WSTLUR_2024">repository</a> locally. This is because this repository uses the <code>{renv}</code> R package to manage the package dependencies of the code we use. This is important to make sure we are using the same versions of the relevant packages.</p>
 <p>Once you have cloned the repo and you’ve opened the <code>access_workshop_bogota_2024.Rproj</code> file, you can simply run <code>renv::restore()</code> to install all the package dependencies used in this workshop.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment the line below in case you need to install the {renv} package</span></span>
@@ -287,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="installing-java-jdk" class="level1">
 <h1>Installing Java JDK</h1>
-<p>To use the <code>{r5r}</code> package (version v2.0 or higher), you will need to have <em>Java Development Kit (JDK) 21</em> installed on your computer. There are numerous open-source JDK implementations. The easiest way to install JDK is using the new <a href="https://github.com/e-kotov/rJavaEnv">{rJavaEnv}</a> package in R, developed by Egor Kotov (thanks Egor!)</p>
+<p>To use the <code>{r5r}</code> package (version v2.0 or higher), you will need to have <em>Java Development Kit (JDK) 21</em> installed on your computer. There are numerous open-source JDK implementations. The easiest way to install JDK is using the new <a href="https://github.com/e-kotov/rJavaEnv">{rJavaEnv}</a> package in R, developed by Egor Kotov (thanks Egor!).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install dev version of {rJavaEnv}</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"e-kotov/rJavaEnv"</span>)</span>

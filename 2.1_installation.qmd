@@ -1,5 +1,6 @@
 ---
 title: "Installation"
+from: markdown+emoji
 ---
 
 ::: {.callout-important appearance="simple"}
@@ -14,16 +15,16 @@ See instructions below:
 
 # Installing R and RStudio
 
-We assume you already have R and RStudio installed in your machine. In case you don't, [follow these simple instructions here](https://posit.co/download/rstudio-desktop/#download).
+We assume you already have R and RStudio installed on your machine. In case you don't, [follow these simple instructions here](https://posit.co/download/rstudio-desktop/#download).
 
 
 
 # Installing R packages
 
-The workshop uses a few R packages that need to be installed in your machine. The simplest way to do this is running the code below. This might take a few minutes if this is the first time you install these packages.
+The workshop uses a few R packages that need to be installed on your machine. The simplest way to do this is running the code below. This might take a few minutes if this is the first time you install these packages.
 
 ```{R eval = FALSE, message = FALSE}
-pkgs_to_install <- c(
+pkgs <- c(
   'r5r',
   'accessibility',
   'ggplot2',
@@ -33,10 +34,10 @@ pkgs_to_install <- c(
   'sf'
   )
 
-install.packages(pkgs_to_install)
+install.packages(pkgs)
 ```
 
-The safest way to replicate the code of this workshop, though, is cloning its [repository](https://github.com/ipeaGIT/access_workshop_WSTLUR_2024) locally. This is because this repository uses the `{renv}` R package to manage the workshop dependencies, which is important to make sure we are using the intended versions of the packages dependencies.
+The safest way to replicate the code of this workshop, though, is cloning its [repository](https://github.com/ipeaGIT/access_workshop_WSTLUR_2024) locally. This is because this repository uses the `{renv}` R package to manage the package dependencies of the code we use. This is important to make sure we are using the same versions of the relevant packages.
 
 Once you have cloned the repo and you've opened the `access_workshop_bogota_2024.Rproj` file, you can simply run `renv::restore()` to install all the package dependencies used in this workshop.
 
@@ -50,7 +51,7 @@ renv::restore()
 
 # Installing Java JDK
 
-To use the `{r5r}` package (version v2.0 or higher), you will need to have *Java Development Kit (JDK) 21* installed on your computer. There are numerous open-source JDK implementations. The easiest way to install JDK is using the new [{rJavaEnv}](https://github.com/e-kotov/rJavaEnv) package in R, developed by Egor Kotov (thanks Egor!)
+To use the `{r5r}` package (version v2.0 or higher), you will need to have *Java Development Kit (JDK) 21* installed on your computer. There are numerous open-source JDK implementations. The easiest way to install JDK is using the new [{rJavaEnv}](https://github.com/e-kotov/rJavaEnv) package in R, developed by Egor Kotov (thanks Egor!).
 
 ```{R eval = FALSE}
 # install dev version of {rJavaEnv}
