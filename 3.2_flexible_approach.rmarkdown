@@ -4,6 +4,9 @@ code-annotations: hover
 from: markdown+emoji
 ---
 
+
+
+
 In the the previous section, we learned a 'quick approach' to calculate accessibility directly from within `{r5r}`. A shortcoming of this approach is that it is limited to only a few predefined accessibility metrics available in `{r5r}`. Oftentimes, we want to analyze other types of accessibility metrics and/or to have more control of the different steps of the analysis.
 
 **In this section, we'll learn how to calculate travel time matrices and to use them to compute different types of accessibility metrics.** This is a more 'flexible' approach that combines the capabilities of the `{r5r}` and the `{accessibility}` packages. We'll use again the sample data for the city of Porto Alegre, Brazil, that comes with the `{r5r}` package.
@@ -22,6 +25,9 @@ This flexible approach to calculate accessibility only involves 3 steps:
 
 Now let's start loading the packages we need:
 
+
+
+
 ```{r, message=FALSE}
 # allocating memory to java
 options(java.parameters = "-Xmx6G")
@@ -35,9 +41,15 @@ library(ggplot2)
 ```
 
 
+
+
+
 # 1. Building a routable transport network
 
 First, we build the multimodal transport network by passing the path of our data directory to the `r5r::setup_r5()` function.
+
+
+
 
 ```{r, message=FALSE}
 # path to data directory
@@ -49,11 +61,17 @@ r5r_core <- r5r::setup_r5(data_path,
 
 ```
 
+
+
+
 # 2. Computing a travel time matrix
 
 The second step is to calculate a travel time matrix with door-to-door travel time estimates from all origins to all destinations. To do this, we use the `r5r::travel_time_matrix()` function.
 
 As basic inputs, this function receives the routable network created above, origin and destination points as `data.frames` with columns `id`, `lon` and `lat`, the transportation mode and the departure time.
+
+
+
 
 ```{r}
 # read points data
@@ -76,6 +94,9 @@ ttm <- r5r::travel_time_matrix(
   progress = TRUE
   )
 ```
+
+
+
 1. In minutes
 
 
@@ -87,9 +108,15 @@ Note that the `r5r::travel_time_matrix()` includes several additional parameters
 The output is a `data.frame`, which looks like this. It is a matrix in long format with the columns `from_id`, `to_id` and a third column indicating the travel time (in minutes) for each origin-destination pair.
 
 
+
+
+
 ```{r}
 head(ttm)
 ```
+
+
+
 
 
 ::: {.callout-note appearance="simple"}
@@ -117,10 +144,16 @@ The package currently includes more than 7 different types of accessibility meas
 
 As basic inputs, all functions of the package require a pre-calculated cost matrix (in our case, a travel time matrix) and some land use data with the number of opportunities (e.g. schools, jobs) in each cell of the study area. Both inputs must be organized in a `data.frame` format. We have just seen above the structure of the travel matrix. The land use `data.frame` must be organized like this:
 
+
+
+
 ```{r}
 # land use data
 head(points)                # <1>
 ```
+
+
+
 1. The land use data must contain an `id` column, referring to the ids listed in the travel matrix, and the number of opportunities in each location.
 
 
@@ -135,6 +168,9 @@ To calculate a traditional cumulative accessibility measure, we can use the `acc
 
 Here, we calculate the number of schools accessible in 20 minutes.
 
+
+
+
 ```{r}
 # threshold-based cumulative accessibility
 access_cum_t <- accessibility::cumulative_cutoff(
@@ -148,6 +184,9 @@ access_cum_t <- accessibility::cumulative_cutoff(
 head(access_cum_t)
 
 ```
+
+
+
 ### Interval-based cumulative accessibility
 
 Previous studies have shown that the *ad-hoc* choice of a single travel time threshold can substantially influence the results of traditional cumulative accessibility measures, introducing bias into transport project evaluations and equity analyses [@pereira2019future]. To overcome this issue, we have proposed a *time interval* cumulative accessibility measure [@tomasiello2023time]. This new metric estimates the average (or the median) number of opportunities that can be reached considering multiple minute-by-minute cutoffs within a given travel time interval. 
@@ -155,6 +194,9 @@ Previous studies have shown that the *ad-hoc* choice of a single travel time thr
 The main advantage of this metric is that it mitigates the impacts of arbitrary choices of trip duration on accessibility analysis while preserving the computation and communicability advantages of threshold-based cumulative measures. 
 
 Here, we calculate the average number of schools that can be reached between 20 and 30 minutes.
+
+
+
 
 ```{r}
 # interval-based cumulative accessibility
@@ -170,6 +212,9 @@ access_cum_i <- accessibility::cumulative_interval(
 head(access_cum_i)
 
 ```
+
+
+
 
 
 <!-- 
@@ -197,6 +242,9 @@ It includes a `decay_function` parameter that can receive any *function* to conv
 
 Let's see a couple examples with logistic and negative exponential decay functions:
 
+
+
+
 ```{r}
 # logistic decay
 access_lgst <- gravity(
@@ -218,7 +266,13 @@ access_nexp <- gravity(
 
 ```
 
+
+
+
 Here's a quick visualization of the shape of the decay curves we've used.
+
+
+
 
 ```{r}
 #| code-fold: true
@@ -250,9 +304,15 @@ ggplot(weights) +
   theme_minimal()
 ```
 
+
+
+
 # 5. Accessibility map
 
 Now it is super simple to merge all of these accessibility estimates to our spatial grid to visualize these results on a map.
+
+
+
 
 ```{r}
 # rbind all accessibility results in a single data.frame
@@ -283,7 +343,13 @@ access_sf <- left_join(
 ```
 
 
+
+
+
 Plot map
+
+
+
 
 ```{r}
 ggplot() +
@@ -296,6 +362,9 @@ ggplot() +
   theme_void()
 
 ```
+
+
+
 
 
 
