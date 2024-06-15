@@ -4,13 +4,13 @@ project:
 
 about:
   template: solana
-  links:
-    - icon: twitter
-      text: twitter
-      href: https://x.com/UrbanDemog
-    - icon: github
-      text: Github
-      href: https://github.com/ipeaGIT/access_workshop_WSTLUR_2024
+  # links:
+  #   - icon: twitter
+  #     text: twitter
+  #     href: https://x.com/UrbanDemog
+  #   - icon: github
+  #     text: Github
+  #     href: https://github.com/ipeaGIT/access_workshop_WSTLUR_2024
 
 execute:
   freeze: auto
@@ -19,9 +19,18 @@ lang: en
 website:
   title: "A crash course on urban accessibility with R"
   favicon: /images/favicon.png
+  site-url: https://ipeagit.github.io/access_workshop_bogota_2024/
+  repo-url: https://github.com/ipeaGIT/access_workshop_bogota_2024
   sidebar:
     style: "docked"
     search: true
+    tools: 
+      - icon: github
+        text: Github
+        href: https://github.com/ipeaGIT/access_workshop_WSTLUR_2024
+      - icon: twitter
+        text: twitter
+        href: https://x.com/UrbanDemog
     contents:
       - index.qmd
       - section: "2. Getting started"
