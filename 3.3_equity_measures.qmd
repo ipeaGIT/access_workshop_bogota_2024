@@ -2,114 +2,148 @@
 title: "Equity measures"
 ---
 
-Coming soon
+A central question in assessing transportation systems and projects is identifying how their accessibility benefits are distributed across different socioeconomic and demographic groups. Transportation equity concerns in research and practice are fundamentally related to two types of questions: (1) accessibility inequality and (2) accessibility poverty. **In this section you will learn how to use the `{accessibility}` package to calculate different indicators of accessibility inequality and poverty.**
+<img align="right" src="/images/accessibility_logo.png?raw=true" alt="logo" width="140">
 
-<!-- package logos side by side  
+In a recent paper, we discussed the advantages and disadvantages of various inequality and poverty metrics most commonly used in the transport literature [@karner2024advances] (ungated PDF [here](https://www.urbandemographics.org/publication/2024_transp_measuring_transportation_equity/)). The slides below give a *very* short summary of some ideas discussed in the paper. Just enough to follow this workshop section. Nonetheless, I would strongly recommend reading the whole paper.
 
-```{r}
-# allocating memory to java
-options(java.parameters = "-Xmx6G")
+<!-- Slides -->
+<p><embed src="slides/3.3_equity_metrics.pdf" style="width:100.0%;height:100vh;" /></p>
 
-library(r5r)
+
+In this section, we'll be using a couple sample data sets for the city of Belo Horizonte (Brazil), which come with the `{accessibility}` package. In the code chunk below, we read the travel time matrix and land use data and calculate the average number of jobs accessible between 30 and 60 minutes by public transport.
+
+```{r, message=FALSE}
 library(accessibility)
 library(ggplot2)
-
-```
-
-# Accessibility inequality & poverty
-
-```{r}
-# get data
-
-library(accessibility)
+library(dplyr)
 
 # path to data
 data_dir <- system.file("extdata", package = "accessibility")
 
-travel_matrix <- readRDS(file.path(data_dir, "travel_matrix.rds"))
-land_use_data <- readRDS(file.path(data_dir, "land_use_data.rds"))
+# read travel matrix and land use data
+ttm <- readRDS(file.path(data_dir, "travel_matrix.rds"))
+lud <- readRDS(file.path(data_dir, "land_use_data.rds"))
 
+# calculate time interval cumulative access
+access_df <- cumulative_cutoff(
+  travel_matrix = ttm,
+  land_use_data = lud,
+  opportunity = "jobs",
+  travel_cost = "travel_time",
+  cutoff = 30
+  #interval = c(30,60)
+  )
 
-# calculate access
-access <- cumulative_cutoff(  travel_matrix,
-                              land_use_data,
-                              opportunity = "jobs",
-                              travel_cost = "travel_time",
-                              cutoff = 30
-                            )
-
-head(access)
+head(access_df)
 ```
-
-
-
-
-
-# Accessibility inequality
+Time for a quick visual inspection! We can merge our accessibility results with the land use/population data, and visualize how employment accessibility is distributed across different income groups.
 
 ```{r}
-#
-# Palma = (avereage) Top 10%  / botton 40%
+# merge acces and land use data
+df <- access_df |>
+      rename(jobs_access = jobs) |>
+      left_join(lud, by='id')
 
+# remove spatial units with no population
+df <- filter(df, population > 0)
+
+# box plot
+ggplot(data = df) +
+  geom_boxplot(show.legend = FALSE,
+               aes(x = income_decile, 
+                   y = jobs_access / 1000, 
+                   weight = population, 
+                   color = income_decile)) +
+  scale_colour_brewer(palette = 'RdBu') + 
+  labs(subtitle = 'Number of jobs accessible between 30 and 60 minutes by public transport',
+       x = 'Income decile', y = 'Jobs (in thousands)') +
+  scale_x_discrete(labels = c("D1\npoorest", 
+                              paste0("D", 2:9), 
+                              "D10\nwealthiest")) +
+  theme_minimal()
+```
+
+The box plot shows a very uneven distribution of access to job opportunities. Now let's what we can learn about accessibility inequality and poverty in this regions with a few examples.
+
+::: {.callout-tip appearance="simple"}
+A detailed explanation of all inequality and poverty measures covered in `{accessibility}` are available in the [package documentation](https://ipeagit.github.io/accessibility/articles/inequality_and_poverty.html).
+:::
+
+# Inequality measures
+
+## Palma ratio
+
+The Palma ratio is calculated as the average access of the richest 10% divided by the average access of the poorest 40%. Palma Ratio values higher than 1 indicate that the wealthiest population has higher accessibility levels than the poorest, whereas values lower than 1 indicate the opposite situation.
+
+In the example here, we see that the wealthiest population can access on average 3.8 times more jobs than the poor population.
+
+```{r}
 palma <- palma_ratio(
-                      accessibility_data = access,
-                      sociodemographic_data = land_use_data,
-                      opportunity = "jobs",
-                      population = "population",
-                      income = "income_per_capita"
-                    )
+  accessibility_data = access_df,
+  sociodemographic_data = lud,
+  opportunity = "jobs",
+  population = "population",
+  income = "income_per_capita"
+  )
 
 palma
+```
+## Concentration index
 
+The concentration index (CI) estimates the extent to which accessibility inequalities are systematically associated with individuals’ socioeconomic levels. CI values can theoretically vary between -1 and 1 (when all accessibility is concentrated in the most or in the least disadvantaged cell, respectively). Negative values indicate that inequalities favor the poor, while positive values indicate a pro-rich bias.
 
-
-
-
-# concentration index
-
-ci <- accessibility::gini_index(
-                          accessibility_data = access,
-                          sociodemographic_data = land_use_data,
-                          opportunity = "jobs",
-                          population = "population"
-                          #,
-                         # income = "income_per_capita"
-                          # , type = "corrected"
-                        )
+```{r}
+ci <- accessibility::concentration_index(
+  accessibility_data = access_df,
+  sociodemographic_data = lud,
+  opportunity = "jobs",
+  population = "population",
+  income = "income_per_capita",
+  type = "corrected"
+  )
 
 ci
-
-
-
-
-
 ```
+## ~~Gini index~~
+
+You probably shouldn't use the Gini index to measure accessibility inequality [see @karner2024advances].
 
 # Accessibility poverty
 
-```{r}
-poverty <- fgt_poverty(
-                          accessibility_data =  access,
-                          sociodemographic_data = land_use_data,
-                          opportunity = "jobs",
-                          population = "population",
-                          poverty_line = 100000
-                        )
+## Foster-Greer-Thorbecke (FGT) poverty measures 
 
+The `fgt_poverty()` function calculates the FGT metrics, a family of poverty measures originally proposed by @foster1984class that can be used to capture the extent and severity of poverty within an accessibility distribution. The FGT family is composed of three measures:
+
+- FGT0: it captures the extent of poverty as a simple headcount - i.e. the proportion of people below the poverty line;
+- FGT1: also know as the "poverty gap index", it captures the severity of poverty as the average percentage distance between the poverty line and the accessibility of individuals below the poverty line;
+- FGT2: it simultaneously captures the extent and the severity of poverty by calculating the number of people below the poverty line weighted by the size of the accessibility shortfall relative to the poverty line.
+
+This function includes an additional `poverty_line` parameter, used to define
+the poverty line below which individuals are considered to be in accessibility
+poverty. For the sake of this exercise, we'll consider the lowest 25th percentile of access as our poverty line, which in this example is approximately 23 thousand jobs.
+
+::: {.callout-important appearance="simple"}
+Quick reminder that the definition of an accessibility poverty line is ultimately a moral and political decision [@pereira2017distributive, @lucas2019measuring].
+:::
+
+```{r}
+# get the 25th percentile of access
+quant25 <- quantile(access_df$jobs, .25)
+
+poverty <- fgt_poverty(
+  accessibility_data =  access_df,
+  sociodemographic_data = lud,
+  opportunity = "jobs",
+  population = "population",
+  poverty_line = quant25
+  )
 
 poverty
 ```
+Quick interpretation here:
 
+- FGT0: 17.8% of the population are in accessibility poverty
+- FGT1: the accessibility of those living in accessibility poverty is on average 5% lower than the poverty line
+- FGT2: overall poverty level/intensity is 2.8% (?)
 
-
-# interpretation
-
-#' FGT0: 54% of the pop in poverty
-#' FGT1: the accessibility of the poor is on average 33% lower than the poverty line
-#' FGT2: 
-#' 
-#' 
-#' 
-
-
--->

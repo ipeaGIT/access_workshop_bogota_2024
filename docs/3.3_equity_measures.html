@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -31,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./3.2_flexible_approach.html" rel="prev">
-<link href="./favicon.jpg" rel="icon" type="image/jpeg">
+<link href=".//images/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -74,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar docked fullcontent">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -174,7 +228,23 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+  <ul>
+  <li><a href="#inequality-measures" id="toc-inequality-measures" class="nav-link active" data-scroll-target="#inequality-measures">Inequality measures</a>
+  <ul class="collapse">
+  <li><a href="#palma-ratio" id="toc-palma-ratio" class="nav-link" data-scroll-target="#palma-ratio">Palma ratio</a></li>
+  <li><a href="#concentration-index" id="toc-concentration-index" class="nav-link" data-scroll-target="#concentration-index">Concentration index</a></li>
+  <li><a href="#gini-index" id="toc-gini-index" class="nav-link" data-scroll-target="#gini-index"><del>Gini index</del></a></li>
+  </ul></li>
+  <li><a href="#accessibility-poverty" id="toc-accessibility-poverty" class="nav-link" data-scroll-target="#accessibility-poverty">Accessibility poverty</a>
+  <ul class="collapse">
+  <li><a href="#foster-greer-thorbecke-fgt-poverty-measures" id="toc-foster-greer-thorbecke-fgt-poverty-measures" class="nav-link" data-scroll-target="#foster-greer-thorbecke-fgt-poverty-measures">Foster-Greer-Thorbecke (FGT) poverty measures</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <div class="quarto-about-solana column-body">
   <div class="about-entity">
@@ -196,130 +266,205 @@ ul.task-list li input[type="checkbox"] {
   </a>
 </div>
       <div class="about-contents"><main class="content" id="quarto-document-content">
-<p>Coming soon</p>
-<!-- package logos side by side  
-::: {.cell}
-```{.r .cell-code}
-# allocating memory to java
-options(java.parameters = "-Xmx6G")
-library(r5r)
-```
-::: {.cell-output .cell-output-stderr}
-```
-Please make sure you have already allocated some memory to Java by running:
-  options(java.parameters = '-Xmx2G').
-You should replace '2G' by the amount of memory you'll require. Currently, Java memory is set to -Xmx6G
-```
-:::
-```{.r .cell-code}
-library(accessibility)
-library(ggplot2)
-```
-:::
-# Accessibility inequality & poverty
-::: {.cell}
-```{.r .cell-code}
-# get data
-library(accessibility)
-# path to data
-data_dir <- system.file("extdata", package = "accessibility")
-travel_matrix <- readRDS(file.path(data_dir, "travel_matrix.rds"))
-land_use_data <- readRDS(file.path(data_dir, "land_use_data.rds"))
-# calculate access
-access <- cumulative_cutoff(  travel_matrix,
-                              land_use_data,
-                              opportunity = "jobs",
-                              travel_cost = "travel_time",
-                              cutoff = 30
-                            )
-head(access)
-```
-::: {.cell-output .cell-output-stdout}
-```
-                id  jobs
-            <char> <int>
+
+<p>A central question in assessing transportation systems and projects is identifying how their accessibility benefits are distributed across different socioeconomic and demographic groups. Transportation equity concerns in research and practice are fundamentally related to two types of questions: (1) accessibility inequality and (2) accessibility poverty. <strong>In this section you will learn how to use the <code>{accessibility}</code> package to calculate different indicators of accessibility inequality and poverty.</strong> <img align="right" src="./images/accessibility_logo.png?raw=true" alt="logo" width="140"></p>
+<p>In a recent paper, we discussed the advantages and disadvantages of various inequality and poverty metrics most commonly used in the transport literature <span class="citation" data-cites="karner2024advances">(<a href="#ref-karner2024advances" role="doc-biblioref">Karner, Pereira, and Farber 2024</a>)</span> (ungated PDF <a href="https://www.urbandemographics.org/publication/2024_transp_measuring_transportation_equity/">here</a>). The slides below give a <em>very</em> short summary of some ideas discussed in the paper. Just enough to follow this workshop section. Nonetheless, I would strongly recommend reading the whole paper.</p>
+<!-- Slides -->
+<p>
+<embed src="slides/3.3_equity_metrics.pdf" style="width:100.0%;height:100vh;">
+</p>
+<p>In this section, we’ll be using a couple sample data sets for the city of Belo Horizonte (Brazil), which come with the <code>{accessibility}</code> package. In the code chunk below, we read the travel time matrix and land use data and calculate the average number of jobs accessible between 30 and 60 minutes by public transport.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(accessibility)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># path to data</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata"</span>, <span class="at">package =</span> <span class="st">"accessibility"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># read travel matrix and land use data</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ttm <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"travel_matrix.rds"</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>lud <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"land_use_data.rds"</span>))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate time interval cumulative access</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>access_df <span class="ot">&lt;-</span> <span class="fu">cumulative_cutoff</span>(</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_matrix =</span> ttm,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">land_use_data =</span> lud,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunity =</span> <span class="st">"jobs"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_cost =</span> <span class="st">"travel_time"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">cutoff =</span> <span class="dv">30</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">#interval = c(30,60)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(access_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                id  jobs
+            &lt;char&gt; &lt;int&gt;
 1: 89a881a5a2bffff 14561
 2: 89a881a5a2fffff 29452
 3: 89a881a5a67ffff 16647
 4: 89a881a5a6bffff 10700
 5: 89a881a5a6fffff  6669
-6: 89a881a5b03ffff 37029
-```
-:::
-:::
-# Accessibility inequality
-::: {.cell}
-```{.r .cell-code}
-#
-# Palma = (avereage) Top 10%  / botton 40%
-palma <- palma_ratio(
-                      accessibility_data = access,
-                      sociodemographic_data = land_use_data,
-                      opportunity = "jobs",
-                      population = "population",
-                      income = "income_per_capita"
-                    )
-palma
-```
-::: {.cell-output .cell-output-stdout}
-```
-   palma_ratio
-         <num>
-1:    3.800465
-```
-:::
-```{.r .cell-code}
-# concentration index
-ci <- accessibility::gini_index(
-                          accessibility_data = access,
-                          sociodemographic_data = land_use_data,
-                          opportunity = "jobs",
-                          population = "population"
-                          #,
-                         # income = "income_per_capita"
-                          # , type = "corrected"
-                        )
-ci
-```
-::: {.cell-output .cell-output-stdout}
-```
-   gini_index
-        <num>
-1:  0.4715251
-```
-:::
-:::
-# Accessibility poverty
-::: {.cell}
-```{.r .cell-code}
-poverty <- fgt_poverty(
-                          accessibility_data =  access,
-                          sociodemographic_data = land_use_data,
-                          opportunity = "jobs",
-                          population = "population",
-                          poverty_line = 100000
-                        )
-poverty
-```
-::: {.cell-output .cell-output-stdout}
-```
-        FGT0      FGT1      FGT2
-       <num>     <num>     <num>
-1: 0.5855476 0.3394363 0.2319952
-```
-:::
-:::
-# interpretation
-#' FGT0: 54% of the pop in poverty
-#' FGT1: the accessibility of the poor is on average 33% lower than the poverty line
-#' FGT2: 
-#' 
-#' 
-#' 
--->
+6: 89a881a5b03ffff 37029</code></pre>
+</div>
+</div>
+<p>Time for a quick visual inspection! We can merge our accessibility results with the land use/population data, and visualize how employment accessibility is distributed across different income groups.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merge acces and land use data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> access_df <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rename</span>(<span class="at">jobs_access =</span> jobs) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">left_join</span>(lud, <span class="at">by=</span><span class="st">'id'</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># remove spatial units with no population</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">filter</span>(df, population <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># box plot</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x =</span> income_decile, </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> jobs_access <span class="sc">/</span> <span class="dv">1000</span>, </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">weight =</span> population, </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">color =</span> income_decile)) <span class="sc">+</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">'RdBu'</span>) <span class="sc">+</span> </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">'Number of jobs accessible between 30 and 60 minutes by public transport'</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">'Income decile'</span>, <span class="at">y =</span> <span class="st">'Jobs (in thousands)'</span>) <span class="sc">+</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">poorest"</span>, </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"D10</span><span class="sc">\n</span><span class="st">wealthiest"</span>)) <span class="sc">+</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="3.3_equity_measures_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The box plot shows a very uneven distribution of access to job opportunities. Now let’s what we can learn about accessibility inequality and poverty in this regions with a few examples.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>A detailed explanation of all inequality and poverty measures covered in <code>{accessibility}</code> are available in the <a href="https://ipeagit.github.io/accessibility/articles/inequality_and_poverty.html">package documentation</a>.</p>
+</div>
+</div>
+</div>
+<section id="inequality-measures" class="level1">
+<h1>Inequality measures</h1>
+<section id="palma-ratio" class="level2">
+<h2 data-anchor-id="palma-ratio">Palma ratio</h2>
+<p>The Palma ratio is calculated as the average access of the richest 10% divided by the average access of the poorest 40%. Palma Ratio values higher than 1 indicate that the wealthiest population has higher accessibility levels than the poorest, whereas values lower than 1 indicate the opposite situation.</p>
+<p>In the example here, we see that the wealthiest population can access on average 3.8 times more jobs than the poor population.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>palma <span class="ot">&lt;-</span> <span class="fu">palma_ratio</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">accessibility_data =</span> access_df,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sociodemographic_data =</span> lud,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunity =</span> <span class="st">"jobs"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">population =</span> <span class="st">"population"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">income =</span> <span class="st">"income_per_capita"</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>palma</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   palma_ratio
+         &lt;num&gt;
+1:    3.800465</code></pre>
+</div>
+</div>
+</section>
+<section id="concentration-index" class="level2">
+<h2 data-anchor-id="concentration-index">Concentration index</h2>
+<p>The concentration index (CI) estimates the extent to which accessibility inequalities are systematically associated with individuals’ socioeconomic levels. CI values can theoretically vary between -1 and 1 (when all accessibility is concentrated in the most or in the least disadvantaged cell, respectively). Negative values indicate that inequalities favor the poor, while positive values indicate a pro-rich bias.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> accessibility<span class="sc">::</span><span class="fu">concentration_index</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">accessibility_data =</span> access_df,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sociodemographic_data =</span> lud,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunity =</span> <span class="st">"jobs"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">population =</span> <span class="st">"population"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">income =</span> <span class="st">"income_per_capita"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"corrected"</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>ci</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   concentration_index
+                 &lt;num&gt;
+1:           0.3346494</code></pre>
+</div>
+</div>
+</section>
+<section id="gini-index" class="level2">
+<h2 data-anchor-id="gini-index"><del>Gini index</del></h2>
+<p>You probably shouldn’t use the Gini index to measure accessibility inequality <span class="citation" data-cites="karner2024advances">(see <a href="#ref-karner2024advances" role="doc-biblioref">Karner, Pereira, and Farber 2024</a>)</span>.</p>
+</section>
+</section>
+<section id="accessibility-poverty" class="level1">
+<h1>Accessibility poverty</h1>
+<section id="foster-greer-thorbecke-fgt-poverty-measures" class="level2">
+<h2 data-anchor-id="foster-greer-thorbecke-fgt-poverty-measures">Foster-Greer-Thorbecke (FGT) poverty measures</h2>
+<p>The <code>fgt_poverty()</code> function calculates the FGT metrics, a family of poverty measures originally proposed by <span class="citation" data-cites="foster1984class">Foster, Greer, and Thorbecke (<a href="#ref-foster1984class" role="doc-biblioref">1984</a>)</span> that can be used to capture the extent and severity of poverty within an accessibility distribution. The FGT family is composed of three measures:</p>
+<ul>
+<li>FGT0: it captures the extent of poverty as a simple headcount - i.e.&nbsp;the proportion of people below the poverty line;</li>
+<li>FGT1: also know as the “poverty gap index”, it captures the severity of poverty as the average percentage distance between the poverty line and the accessibility of individuals below the poverty line;</li>
+<li>FGT2: it simultaneously captures the extent and the severity of poverty by calculating the number of people below the poverty line weighted by the size of the accessibility shortfall relative to the poverty line.</li>
+</ul>
+<p>This function includes an additional <code>poverty_line</code> parameter, used to define the poverty line below which individuals are considered to be in accessibility poverty. For the sake of this exercise, we’ll consider the lowest 25th percentile of access as our poverty line, which in this example is approximately 23 thousand jobs.</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Quick reminder that the definition of an accessibility poverty line is ultimately a moral and political decision <span class="citation" data-cites="pereira2017distributive">Lucas et al. (<a href="#ref-lucas2019measuring" role="doc-biblioref">2019</a>)</span>.</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the 25th percentile of access</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>quant25 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(access_df<span class="sc">$</span>jobs, .<span class="dv">25</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>poverty <span class="ot">&lt;-</span> <span class="fu">fgt_poverty</span>(</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">accessibility_data =</span>  access_df,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sociodemographic_data =</span> lud,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunity =</span> <span class="st">"jobs"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">population =</span> <span class="st">"population"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">poverty_line =</span> quant25</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>poverty</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        FGT0       FGT1       FGT2
+       &lt;num&gt;      &lt;num&gt;      &lt;num&gt;
+1: 0.1478675 0.04948043 0.02862334</code></pre>
+</div>
+</div>
+<p>Quick interpretation here:</p>
+<ul>
+<li>FGT0: 17.8% of the population are in accessibility poverty</li>
+<li>FGT1: the accessibility of those living in accessibility poverty is on average 5% lower than the poverty line</li>
+<li>FGT2: overall poverty level/intensity is 2.8% (?)</li>
+</ul>
 
 
-</main></div>
+
+</section>
+</section>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-foster1984class" class="csl-entry" role="listitem">
+Foster, James, Joel Greer, and Erik Thorbecke. 1984. <span>“A <span>Class</span> of <span>Decomposable Poverty Measures</span>.”</span> <em>Econometrica</em> 52 (3): 761–66. <a href="https://doi.org/10.2307/1913475">https://doi.org/10.2307/1913475</a>.
+</div>
+<div id="ref-karner2024advances" class="csl-entry" role="listitem">
+Karner, Alex, Rafael H. M. Pereira, and Steven Farber. 2024. <span>“Advances and Pitfalls in Measuring Transportation Equity.”</span> <em>Transportation</em>, January. <a href="https://doi.org/10.1007/s11116-023-10460-7">https://doi.org/10.1007/s11116-023-10460-7</a>.
+</div>
+<div id="ref-lucas2019measuring" class="csl-entry" role="listitem">
+Lucas, Karen, Karel Martens, Floridea Di Ciommo, and Ariane Dupont-Kieffer. 2019. <em>Measuring Transport Equity</em>. Elsevier.
+</div>
+<div id="ref-pereira2017distributive" class="csl-entry" role="listitem">
+Pereira, Rafael H. M., Tim Schwanen, and David Banister. 2017. <span>“Distributive Justice and Equity in Transportation.”</span> <em>Transport Reviews</em> 37 (2): 170–91. <a href="https://doi.org/10.1080/01441647.2016.1257660">https://doi.org/10.1080/01441647.2016.1257660</a>.
+</div>
+</div></section></div></main></div>
     </div>
   </div>
 </div>

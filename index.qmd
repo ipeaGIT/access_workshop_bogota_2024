@@ -26,7 +26,7 @@ The workshop will also illustrate how to calculate different measures of *inequa
 :::
 
 
-Here are a few introductory slides explaining we will cover and what we *do not* cover in this workshop:
+Here are a few introductory slides explaining what we cover and what we *do not* cover in this workshop:
 
 <p><embed src="slides/1_intro.pdf" style="width:100.0%;height:100vh;" /></p>
 

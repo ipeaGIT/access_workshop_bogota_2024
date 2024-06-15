@@ -4,7 +4,7 @@ code-annotations: hover
 ---
 
 <img align="right" src="/images/r5r_logo.png?raw=true" alt="logo" width="140"> 
-In this first hands-on section of the workshop, we'll learn a very quick and simple way to calculate spatial accessibility using the `{r5r}` package. In the next section, we'll see a more flexible and robust way to do the same thing. Here we'll be calculating the number of schools accessible by public transport within a travel time of up to 20 minutes.
+**In this first hands-on section of the workshop, we'll learn a very quick and simple way to calculate spatial accessibility using the `{r5r}` package**. In the next section, we'll see a more flexible and robust way to do the same thing. Here we'll be calculating the number of schools accessible by public transport within a travel time of up to 20 minutes.
 
 
 ### 1. Allocating memory to Java & loading packages
@@ -123,7 +123,7 @@ access1 <- r5r::accessibility(
 
 ::: {.callout-tip}
 ## Tip
-Note that the `r5r::accessibility()` function has several additional parameters. These allow you to specify different characteristics of trips, including a maximun trip duration, walking and cycling speed, level of traffic stress (LTS), etc. For more info, check the documentation of the function by calling `?r5r::accessibility` in your R Console or check the documentation on [{r5r} website](https://ipeagit.github.io/r5r/reference/accessibility.html).
+Note that the `r5r::accessibility()` function has several additional parameters. These allow you to specify different characteristics of trips, including a maximum trip duration, walking and cycling speed, level of traffic stress (LTS), etc. For more info, check the documentation of the function by calling `?r5r::accessibility` in your R Console or check the documentation on [{r5r} website](https://ipeagit.github.io/r5r/reference/accessibility.html).
 :::
 
 

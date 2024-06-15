@@ -5,7 +5,7 @@ code-annotations: hover
 
 In the the previous section, we learned a 'quick approach' to calculate accessibility directly from within `{r5r}`. The shortcoming of this approach it that is limited to only a few predefined accessibility metrics available in `{r5r}`. Oftentimes, we want to analyze other types of accessibility metrics and/or to have more control of the different steps of the analysis.
 
-In this section, we'll learn how to calculate a travel time matrix and how to use it to compute different types of accessibility metrics. This is a more 'flexible' approach that combines the capabilities of the `{r5r}` and the `{accessibility}` packages. We'll use again the sample data for the city of Porto Alegre (Brazil) that comes with the `{r5r}` package.
+**In this section, we'll learn how to calculate a travel time matrix and how to use it to compute different types of accessibility metrics.** This is a more 'flexible' approach that combines the capabilities of the `{r5r}` and the `{accessibility}` packages. We'll use again the sample data for the city of Porto Alegre (Brazil) that comes with the `{r5r}` package.
 
 <!-- package logos side by side  -->
 <div style="text-align: center">
@@ -217,7 +217,7 @@ access_nexp <- gravity(
 
 ```
 
-Here's a quick visulization of the shape of the decay curves we've used.
+Here's a quick visualization of the shape of the decay curves we've used.
 
 ```{r}
 #| code-fold: true
