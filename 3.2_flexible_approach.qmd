@@ -149,7 +149,7 @@ head(access_cum_t)
 ```
 ### Interval-based cumulative accessibility
 
-Previous studies have shown that the *ad-hoc* choice of a single travel time threshold can substantially influence the results of traditional cumulative accessibility measures, introducing bias into transport project evaluations and equity analyses. [@pereira2019future]. To overcome this issue, we have proposed a *time interval* cumulative accessibility measure [@tomasiello2023time]. This new metric estimates the average (or the median) number of opportunities that can be reached considering multiple minute-by-minute cutoffs within a given travel time interval. 
+Previous studies have shown that the *ad-hoc* choice of a single travel time threshold can substantially influence the results of traditional cumulative accessibility measures, introducing bias into transport project evaluations and equity analyses [@pereira2019future]. To overcome this issue, we have proposed a *time interval* cumulative accessibility measure [@tomasiello2023time]. This new metric estimates the average (or the median) number of opportunities that can be reached considering multiple minute-by-minute cutoffs within a given travel time interval. 
 
 The main advantage of this metric is that it mitigates the impacts of arbitrary choices of trip duration on accessibility analysis while preserving the computation and communicability advantages of threshold-based cumulative measures. 
 

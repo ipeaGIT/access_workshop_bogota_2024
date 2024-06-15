@@ -2,11 +2,13 @@
 title: "Equity measures"
 ---
 
-A central question in assessing transportation systems and projects is identifying how their accessibility benefits are distributed across different socioeconomic and demographic groups. Transportation equity concerns in research and practice are fundamentally related to two types of questions: (1) accessibility inequality and (2) accessibility poverty. **In this section you will learn how to use the `{accessibility}` package to calculate different indicators of accessibility inequality and poverty.**
+A central question in transportation research and practice involves assessing how the accessibility benefits of transportation systems and projects are distributed across different socioeconomic and demographic groups. Transportation equity concerns in research and practice are fundamentally related to two types of issues: (1) accessibility inequality and (2) accessibility poverty. **In this section you will learn how to use the `{accessibility}` package to calculate different indicators of accessibility inequality and poverty.**
 <img align="right" src="/images/accessibility_logo.png?raw=true" alt="logo" width="140">
 
-In a recent paper, we discussed the advantages and disadvantages of various inequality and poverty metrics most commonly used in the transport literature [@karner2024advances] (ungated PDF [here](https://www.urbandemographics.org/publication/2024_transp_measuring_transportation_equity/)). The slides below give a *very* short summary of some ideas discussed in the paper. Just enough to follow this workshop section. Nonetheless, I would strongly recommend reading the whole paper.
+In a recent paper, we discussed the advantages and disadvantages of various inequality and poverty metrics most commonly used in the transport literature [@karner2024advances] [^1]. The slides below give a *very* short summary of some ideas discussed in the paper. Just enough to follow this workshop section. Nonetheless, I would strongly recommend reading the whole paper.
 
+[^1]: Ungated PDF [here](https://www.urbandemographics.org/publication/2024_transp_measuring_transportation_equity/).
+ 
 <!-- Slides -->
 <p><embed src="slides/3.3_equity_metrics.pdf" style="width:100.0%;height:100vh;" /></p>
 
@@ -124,8 +126,10 @@ the poverty line below which individuals are considered to be in accessibility
 poverty. For the sake of this exercise, we'll consider the lowest 25th percentile of access as our poverty line, which in this example is approximately 23 thousand jobs.
 
 ::: {.callout-important appearance="simple"}
-Quick reminder that the definition of an accessibility poverty line is ultimately a moral and political decision [@pereira2017distributive, @lucas2019measuring].
+Quick reminder that the definition of an accessibility poverty line is ultimately a moral and political decision 
+[@pereira2017distributive; @lucas2019measuring].
 :::
+
 
 ```{r}
 # get the 25th percentile of access
@@ -141,9 +145,10 @@ poverty <- fgt_poverty(
 
 poverty
 ```
-Quick interpretation here:
 
-- FGT0: 17.8% of the population are in accessibility poverty
+Quick interpretation:
+
+- FGT0: 14.8% of the population are in accessibility poverty
 - FGT1: the accessibility of those living in accessibility poverty is on average 5% lower than the poverty line
-- FGT2: overall poverty level/intensity is 2.8% (?)
+- FGT2: it has no clear interpretation, but one could say that the overall poverty level/intensity is 2.8%.
 
