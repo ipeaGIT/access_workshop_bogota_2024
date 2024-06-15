@@ -126,10 +126,8 @@ the poverty line below which individuals are considered to be in accessibility
 poverty. For the sake of this exercise, we'll consider the lowest 25th percentile of access as our poverty line, which in this example is approximately 23 thousand jobs.
 
 ::: {.callout-important appearance="simple"}
-Quick reminder that the definition of an accessibility poverty line is ultimately a moral and political decision 
-[@pereira2017distributive; @lucas2019measuring].
+Quick reminder that the definition of an accessibility poverty line is ultimately a moral and political decision [@pereira2017distributive; @lucas2019measuring].
 :::
-
 
 ```{r}
 # get the 25th percentile of access
