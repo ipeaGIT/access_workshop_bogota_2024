@@ -79,3 +79,4 @@ Alternatively, you can manually download and install any of these JDK implementa
 Here are a few accompanying slides explaining the computational requirements to conduct transport routing and accessibility analysis with `R`.
 
 <p><embed src="slides/2_computational_requirements.pdf" style="width:100.0%;height:100vh;" /></p>
+
