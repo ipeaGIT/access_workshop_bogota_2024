@@ -49,7 +49,7 @@ renv::restore()
 
 
 
-# Installing Java JDK
+# Installing Java
 
 To use the `{r5r}` package (version v2.0 or higher), you will need to have *Java Development Kit (JDK) 21* installed on your computer. There are numerous open-source JDK implementations. The easiest way to install JDK is using the new [{rJavaEnv}](https://github.com/e-kotov/rJavaEnv) package in R, developed by Egor Kotov (thanks Egor!).
 
@@ -57,22 +57,25 @@ To use the `{r5r}` package (version v2.0 or higher), you will need to have *Java
 # install dev version of {rJavaEnv}
 remotes::install_github("e-kotov/rJavaEnv")
 
-# check version of JDK currently installed (if any) 
+# check version of Java currently installed (if any) 
 rJavaEnv::java_check_version_rjava()
 
-# install JDK 21
+# install Java 21
 rJavaEnv::java_quick_install(
   version = 21,
   distribution = 'Corretto')
+
+# check if Java was successfully installed
+rJavaEnv::java_check_version_rjava()
 ```
 
-Alternatively, you can manually download and install any of these options:
+Alternatively, you can manually download and install any of these JDK implementations:
 
 - [Adoptium/Eclipse Temurin](https://adoptium.net/)
 - [Amazon Corretto](https://aws.amazon.com/corretto/)
 - [Oracle OpenJDK](https://jdk.java.net/21/)
 
 
-Accompanying slides explaining the computational requirements to conduct transport routing and accessibility analysis with `R`.
+Here are a few accompanying slides explaining the computational requirements to conduct transport routing and accessibility analysis with `R`.
 
 <p><embed src="slides/2_computational_requirements.pdf" style="width:100.0%;height:100vh;" /></p>
