@@ -60,7 +60,8 @@ install.packages("rJavaEnv")
 # check version of Java currently installed (if any) 
 rJavaEnv::java_check_version_rjava()
 
-## if this is the first time you use {rJavaEnv}, you might need to run this code below to consent the installation of Java.
+## if this is the first time you use {rJavaEnv}, you might need to run this code
+## below to consent the installation of Java.
 # rJavaEnv::rje_consent(provided = TRUE)
 
 # install Java 21
