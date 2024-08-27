@@ -51,14 +51,17 @@ renv::restore()
 
 # Installing Java
 
-To use the `{r5r}` package (version v2.0 or higher), you will need to have *Java Development Kit (JDK) 21* installed on your computer. There are numerous open-source JDK implementations. The easiest way to install JDK is using the new [{rJavaEnv}](https://github.com/e-kotov/rJavaEnv) package in R, developed by Egor Kotov (thanks Egor!).
+To use the `{r5r}` package (version v2.0 or higher), you will need to have *Java Development Kit (JDK) 21* installed on your computer. There are numerous open-source JDK implementations. The easiest way to install JDK is using the new [{rJavaEnv}](https://www.ekotov.pro/rJavaEnv/) package in R, developed by Egor Kotov (thanks Egor!).
 
 ```{R eval = FALSE}
-# install dev version of {rJavaEnv}
-remotes::install_github("e-kotov/rJavaEnv")
+# install {rJavaEnv} from CRAN
+install.packages("rJavaEnv")
 
 # check version of Java currently installed (if any) 
 rJavaEnv::java_check_version_rjava()
+
+## if this is the first time you use {rJavaEnv}, you might need to run this code below to consent the installation of Java.
+# rJavaEnv::rje_consent(provided = TRUE)
 
 # install Java 21
 rJavaEnv::java_quick_install(
